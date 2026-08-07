@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
-import { SiteHeader } from "@/components/site-header";
+import { SkipLink } from "@/components/layout/skip-link";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import "./globals.css";
 
 const display = Fraunces({
@@ -34,19 +36,12 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${display.variable} ${body.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
+        <SkipLink />
         <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <footer className="border-foreground/10 text-muted border-t px-6 py-8 text-sm">
-          <div className="mx-auto flex max-w-5xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p>CO Politica Centro — movimiento en consolidación.</p>
-            <a
-              className="hover:text-foreground underline-offset-4 hover:underline"
-              href="mailto:rafaelsolanov@web.de"
-            >
-              rafaelsolanov@web.de
-            </a>
-          </div>
-        </footer>
+        <main id="contenido" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

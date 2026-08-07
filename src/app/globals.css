@@ -9,6 +9,17 @@
   --muted: #5c6554;
   --surface: #fffdf7;
   --ring: #1a1f16;
+  --border-subtle: color-mix(in srgb, var(--foreground) 12%, transparent);
+  --focus-ring: #1a1f16;
+  --section-space: 4rem;
+  --max-w-prose: 65ch;
+  --max-w-page: 72rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-space: 7rem;
+  }
 }
 
 @theme inline {
@@ -45,4 +56,72 @@ h2,
 h3 {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
   letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--max-w-page);
+  padding-inline: 1.5rem;
+}
+
+.eyebrow {
+  color: var(--brand-green);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.btn-primary {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  background: var(--foreground);
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--background);
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--brand-green);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+  background: var(--surface);
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  transition: border-color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+}
+
+.section-space {
+  padding-block: var(--section-space);
 }
