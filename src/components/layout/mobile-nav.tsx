@@ -21,7 +21,7 @@ export function MobileNav({ items }: MobileNavProps) {
   const [pathnameSnapshot, setPathnameSnapshot] = useState(pathname);
   const titleId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   if (pathname !== pathnameSnapshot) {
     setPathnameSnapshot(pathname);
@@ -36,46 +36,29 @@ export function MobileNav({ items }: MobileNavProps) {
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        close();
-        return;
-      }
+    if (open) {
+      if (!dialog.open) dialog.showModal();
+      window.requestAnimationFrame(() => {
+        dialog.querySelector<HTMLElement>("a[href], button")?.focus();
+      });
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [open]);
 
-      if (event.key !== "Tab" || !panelRef.current) return;
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog || !open) return;
 
-      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-        "a[href], button:not([disabled])",
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+    const onBackdropClick = (event: MouseEvent) => {
+      if (event.target === dialog) close();
     };
 
-    document.addEventListener("keydown", onKeyDown);
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    window.requestAnimationFrame(() => {
-      panelRef.current?.querySelector<HTMLElement>("a[href], button")?.focus();
-    });
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
-    };
+    dialog.addEventListener("click", onBackdropClick);
+    return () => dialog.removeEventListener("click", onBackdropClick);
   }, [open, close]);
 
   return (
@@ -92,68 +75,65 @@ export function MobileNav({ items }: MobileNavProps) {
         {open ? "Cerrar" : "Menú"}
       </button>
 
-      {open ? (
-        <div
-          className="bg-foreground/40 fixed inset-0 z-50"
-          onClick={close}
-          aria-hidden="true"
-        />
-      ) : null}
-
-      <div
-        ref={panelRef}
+      <dialog
+        ref={dialogRef}
         id="mobile-nav-panel"
-        role="dialog"
-        aria-modal="true"
         aria-labelledby={titleId}
-        hidden={!open}
+        onClose={close}
+        onCancel={(event) => {
+          event.preventDefault();
+          close();
+        }}
         className={cn(
-          "bg-surface border-foreground/10 fixed inset-y-0 right-0 z-50 flex w-[min(100%,20rem)] flex-col border-l p-6 shadow-xl transition-transform",
-          open ? "translate-x-0" : "pointer-events-none translate-x-full",
+          "bg-surface text-foreground border-foreground/10 fixed inset-y-0 right-0 m-0 ml-auto h-dvh w-[min(100%,20rem)] max-w-none translate-x-0 border-l p-0 shadow-xl open:flex open:flex-col",
+          "[&::backdrop]:bg-foreground/40",
         )}
       >
-        <div className="mb-8 flex items-center justify-between gap-4">
-          <p id={titleId} className="font-display text-lg font-semibold">
-            Menú
-          </p>
-          <button
-            type="button"
-            className="border-foreground/20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border text-sm font-semibold"
-            onClick={close}
-          >
-            Cerrar
-          </button>
+        <div className="flex h-full flex-col p-6">
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <p id={titleId} className="font-display text-lg font-semibold">
+              Menú
+            </p>
+            <button
+              type="button"
+              className="border-foreground/20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border text-sm font-semibold"
+              onClick={close}
+            >
+              Cerrar
+            </button>
+          </div>
+          <nav aria-label="Principal móvil" className="flex flex-col gap-2">
+            {items.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium"
+                  onClick={close}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className={cn(
+                    "hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium",
+                    pathname === item.href &&
+                      "bg-foreground/5 text-brand-green",
+                  )}
+                  onClick={close}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
+          </nav>
         </div>
-        <nav aria-label="Principal móvil" className="flex flex-col gap-2">
-          {items.map((item) =>
-            item.external ? (
-              <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium"
-                onClick={close}
-              >
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={pathname === item.href ? "page" : undefined}
-                className={cn(
-                  "hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium",
-                  pathname === item.href && "bg-foreground/5 text-brand-green",
-                )}
-                onClick={close}
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
-        </nav>
-      </div>
+      </dialog>
     </div>
   );
 }

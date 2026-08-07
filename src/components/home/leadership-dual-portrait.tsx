@@ -26,9 +26,9 @@ export function LeadershipDualPortrait({
   const primaryRef = useRef<HTMLDivElement>(null);
   const secondaryRef = useRef<HTMLButtonElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const busyRef = useRef(false);
   const reduced = usePrefersReducedMotion();
   const [showAvatar, setShowAvatar] = useState(false);
-  const [busy, setBusy] = useState(false);
   const labelId = useId();
 
   const isHero = size === "hero";
@@ -56,7 +56,7 @@ export function LeadershipDualPortrait({
 
   const swapTo = useCallback(
     (next: boolean) => {
-      if (busy || next === showAvatar) return;
+      if (busyRef.current || next === showAvatar) return;
 
       const primary = primaryRef.current;
       const secondary = secondaryRef.current;
@@ -66,11 +66,11 @@ export function LeadershipDualPortrait({
       }
 
       timelineRef.current?.kill();
-      setBusy(true);
+      busyRef.current = true;
 
       const tl = gsap.timeline({
         onComplete: () => {
-          setBusy(false);
+          busyRef.current = false;
           timelineRef.current = null;
         },
       });
@@ -90,7 +90,7 @@ export function LeadershipDualPortrait({
           ease: "power2.out",
         });
     },
-    [busy, reduced, showAvatar],
+    [reduced, showAvatar],
   );
 
   const toggle = () => swapTo(!showAvatar);
@@ -143,10 +143,10 @@ export function LeadershipDualPortrait({
         type="button"
         onClick={toggle}
         onMouseEnter={() => {
-          if (!reduced && !busy && !showAvatar) swapTo(true);
+          if (!reduced && !busyRef.current && !showAvatar) swapTo(true);
         }}
         onMouseLeave={() => {
-          if (!reduced && !busy && showAvatar) swapTo(false);
+          if (!reduced && !busyRef.current && showAvatar) swapTo(false);
         }}
         aria-labelledby={labelId}
         aria-pressed={showAvatar}

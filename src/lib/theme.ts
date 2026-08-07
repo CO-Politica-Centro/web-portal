@@ -11,11 +11,3 @@ export function applyTheme(theme: Theme) {
   else root.classList.remove("dark");
   localStorage.setItem(THEME_STORAGE_KEY, theme);
 }
-
-export function readTheme(): Theme {
-  const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}

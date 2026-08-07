@@ -8,9 +8,10 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { site } from "@/content/site";
 
+const navItems = site.nav;
+
 export function SiteHeader() {
   const pathname = usePathname();
-  const navItems = [...site.nav];
 
   return (
     <>

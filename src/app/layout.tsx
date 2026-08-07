@@ -20,15 +20,20 @@ const body = Source_Sans_3({
   display: "swap",
 });
 
+const FALLBACK_SITE_URL = "http://localhost:3000";
+
+function resolveMetadataBase(): URL {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
+  return URL.canParse(raw) ? new URL(raw) : new URL(FALLBACK_SITE_URL);
+}
+
 export const metadata: Metadata = {
   title: {
     default: `${site.name} — Portal`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: resolveMetadataBase(),
   icons: {
     icon: [{ url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" }],
     apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
