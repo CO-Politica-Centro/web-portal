@@ -3,20 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { MobileNav, type NavItem } from "@/components/layout/mobile-nav";
-
-const BEACONS_URL = "https://beacons.ai/centropd";
-
-const navItems: NavItem[] = [
-  { href: "/", label: "Inicio" },
-  { href: "/propuestas", label: "Propuestas" },
-  { href: "/equipo", label: "Equipo" },
-  { href: "/contacto", label: "Contacto" },
-  { href: BEACONS_URL, label: "Comunidades", external: true },
-];
+import { MobileNav } from "@/components/layout/mobile-nav";
+import { site } from "@/content/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const navItems = [...site.nav];
 
   return (
     <header className="border-foreground/10 bg-surface/85 sticky top-0 z-40 border-b backdrop-blur">
@@ -25,7 +17,7 @@ export function SiteHeader() {
           href="/"
           className="font-display text-lg font-semibold tracking-tight md:text-xl"
         >
-          CO Politica Centro
+          {site.name}
         </Link>
 
         <nav
