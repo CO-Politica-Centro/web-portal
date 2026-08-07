@@ -29,11 +29,12 @@ pnpm dev
 
 ## Despliegue (Vercel)
 
-1. Conectar este repo a un proyecto Vercel (framework Next.js).
-2. Definir `NEXT_PUBLIC_SITE_URL` con la URL de producción (`https://….vercel.app` o dominio custom).
-3. Branch de producción: `main`.
+- Producción actual: https://web-portal-co-politica.vercel.app
+- Proyecto: `web-portal-co-politica` (team Fravelz)
 
-Para un dominio propio: Project → Settings → Domains.
+Para deploys automáticos desde GitHub, instala la [GitHub App de Vercel](https://github.com/apps/vercel) en la org `CO-Politica-Centro` y vincula este repo en Project → Settings → Git.
+
+Dominio custom: Project → Settings → Domains.
 
 ## Rutas stub
 
