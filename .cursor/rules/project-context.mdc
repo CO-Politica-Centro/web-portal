@@ -1,0 +1,34 @@
+---
+description: Contexto del portal CO Politica Centro (idioma, marca, alcance)
+alwaysApply: true
+---
+
+# Contexto del proyecto — web-portal
+
+Portal web del movimiento **CO Politica Centro** (Colombia, liberalismo social). Org: [CO-Politica-Centro](https://github.com/CO-Politica-Centro). Hub de comunidades: [beacons.ai/centropd](https://beacons.ai/centropd).
+
+## Idioma y comunicación
+
+- **UI, copy, README y docs del repo:** español.
+- **Mensajes de commit:** inglés (Conventional Commits).
+- **Respuestas del agente en el chat:** español.
+
+## Principios de producto
+
+- Es una **plantilla en consolidación**, no un partido inscrito aún.
+- No inventar cargos, alianzas, ni personería jurídica.
+- Contacto publicidad: `rafaelsolanov@web.de`.
+- Liderazgo público de referencia: Rafael Solano (redes oficiales del movimiento).
+
+## Alcance técnico actual
+
+- Next.js App Router + React + TypeScript + Tailwind v4.
+- Utilidad `cn()` en `src/lib/utils.ts`.
+- CI: lint, typecheck, format, test, build (`pnpm run ci`).
+- Deploy: Vercel (`NEXT_PUBLIC_SITE_URL`).
+
+## Qué no hacer por defecto
+
+- No añadir auth, CMS, DB ni features grandes sin petición explícita.
+- No cambiar el branding a “AI purple” / dark glow genérico.
+- No invitar colaboradores ni tocar settings de la org desde este repo.
