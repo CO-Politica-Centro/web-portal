@@ -1,15 +1,25 @@
 # web-portal
 
-Portal web del movimiento **CO Politica Centro** (plantilla Next.js lista para contenido).
+Portal público de **CO Politica Centro** — movimiento político de centro en Colombia (liberalismo social).
+
+Producción: https://web-portal-co-politica.vercel.app
+
+## Qué incluye
+
+- Home narrativa: hero, quiénes somos, pilares, destacados, liderazgo, actualidad, comunidades, cierre
+- Páginas `/propuestas`, `/equipo`, `/contacto`
+- Nav accesible (skip link, menú móvil ARIA, `aria-current`)
+- Scroll motion con GSAP + respeto a `prefers-reduced-motion`
+- Contenido centralizado en `src/content/site.ts`
+- Hub de comunidades: https://beacons.ai/centropd
 
 ## Stack
 
 - Next.js 16 (App Router) + React 19 + TypeScript
-- Tailwind CSS v4
-- `cn()` (`clsx` + `tailwind-merge`)
+- Tailwind CSS v4 + `cn()` (`clsx` + `tailwind-merge`)
+- GSAP / `@gsap/react` / ScrollTrigger
 - Vitest, ESLint, Prettier, react-doctor
-- Vercel Analytics
-- GitHub Actions CI
+- Vercel Analytics + GitHub Actions CI (solo paths de código)
 
 ## Desarrollo
 
@@ -24,21 +34,20 @@ pnpm dev
 | Script              | Descripción                              |
 | ------------------- | ---------------------------------------- |
 | `pnpm dev`          | Servidor local                           |
-| `pnpm ci`           | Lint + typecheck + format + test + build |
+| `pnpm run ci`       | Lint + typecheck + format + test + build |
 | `pnpm react:doctor` | Análisis React Doctor                    |
+
+## Accesibilidad y motion
+
+- Skip link “Saltar al contenido”
+- Landmarks `header` / `main#contenido` / `footer`
+- Menú móvil con Escape, focus trap y cierre al navegar
+- Con `prefers-reduced-motion: reduce` no hay reveals ni parallax
 
 ## Despliegue (Vercel)
 
-- Producción actual: https://web-portal-co-politica.vercel.app
-- Proyecto: `web-portal-co-politica` (team Fravelz)
-
-Para deploys automáticos desde GitHub, instala la [GitHub App de Vercel](https://github.com/apps/vercel) en la org `CO-Politica-Centro` y vincula este repo en Project → Settings → Git.
+- Proyecto: `web-portal-co-politica`
+- Variable: `NEXT_PUBLIC_SITE_URL`
+- Para deploys automáticos desde GitHub: instalar la [GitHub App de Vercel](https://github.com/apps/vercel) en la org y vincular el repo
 
 Dominio custom: Project → Settings → Domains.
-
-## Rutas stub
-
-- `/` — inicio
-- `/propuestas`
-- `/equipo`
-- `/contacto`
