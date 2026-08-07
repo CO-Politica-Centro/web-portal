@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import { ParallaxLite } from "@/components/motion/parallax-lite";
 
 export function HomeHero() {
   return (
@@ -7,14 +8,13 @@ export function HomeHero() {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden"
     >
-      <div
+      <ParallaxLite
         className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        data-parallax-hero
+        factor={0.1}
       >
         <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-[rgb(232_197_71_/0.28)] blur-3xl" />
         <div className="absolute top-20 -right-10 h-80 w-80 rounded-full bg-[rgb(47_107_58_/0.16)] blur-3xl" />
-      </div>
+      </ParallaxLite>
 
       <div className="container-page section-space relative">
         <p className="eyebrow">{site.eyebrow}</p>
