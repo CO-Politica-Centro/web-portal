@@ -27,8 +27,10 @@ export function BrandMark({
         alt=""
         width={size}
         height={size}
-        className="block shrink-0 rounded-full"
+        className="block shrink-0 overflow-hidden rounded-full object-cover"
+        style={{ width: size, height: size }}
         priority={priority}
+        sizes={`${size}px`}
       />
       {showName ? (
         <span

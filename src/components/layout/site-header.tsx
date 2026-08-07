@@ -37,7 +37,7 @@ export function SiteHeader() {
 
           <nav
             aria-label="Principal"
-            className="text-muted hidden h-full items-center gap-5 text-sm md:flex"
+            className="text-muted hidden h-full items-center gap-5 text-base md:flex"
           >
             {navItems.map((item) =>
               item.external ? (

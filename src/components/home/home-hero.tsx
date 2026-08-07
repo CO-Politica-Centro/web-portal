@@ -27,8 +27,9 @@ export function HomeHero() {
               alt=""
               width={72}
               height={72}
-              className="shrink-0 rounded-full"
+              className="aspect-square size-[72px] shrink-0 overflow-hidden rounded-full object-cover"
               priority
+              sizes="72px"
             />
             <p className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               {site.name}

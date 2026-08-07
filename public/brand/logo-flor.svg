@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="CO Politica Centro">
-  <circle cx="512" cy="512" r="512" fill="#fec000"/>
+  <circle cx="512" cy="512" r="512" fill="#FFF100"/>
   <g transform="scale(0.1)">
     <path fill="#000000" d="M4950 8604 c-333 -39 -612 -115 -848 -230 l-93 -45 23 -18 c108 -83
 589 -379 860 -530 l147 -82 213 104 c287 139 541 279 897 493 l64 38 -104 49

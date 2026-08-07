@@ -66,7 +66,7 @@ export function MobileNav({ items }: MobileNavProps) {
       <button
         ref={buttonRef}
         type="button"
-        className="border-foreground/20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border px-3 text-sm font-semibold"
+        className="border-foreground/20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border px-3 text-base font-semibold"
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
         aria-haspopup="dialog"
@@ -96,7 +96,7 @@ export function MobileNav({ items }: MobileNavProps) {
             </p>
             <button
               type="button"
-              className="border-foreground/20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border text-sm font-semibold"
+              className="border-foreground/20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border text-base font-semibold"
               onClick={close}
             >
               Cerrar

@@ -51,6 +51,7 @@
 
 /* Wash on html (not body::before) so it isn't covered by html's solid fill */
 html {
+  font-size: 112.5%; /* 18px — base más legible para accesibilidad */
   background:
     radial-gradient(
       ellipse 90% 70% at 8% -5%,
@@ -86,6 +87,8 @@ body {
   background-color: transparent;
   color: var(--foreground);
   font-family: var(--font-source), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 h1,
@@ -109,7 +112,7 @@ h3 {
 
 .eyebrow {
   color: var(--brand-green);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -130,7 +133,7 @@ h3 {
   border-radius: 0.375rem;
   background: var(--foreground);
   padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--background);
   transition: background-color 0.15s ease;
@@ -149,7 +152,7 @@ h3 {
   border: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
   background: var(--surface);
   padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--foreground);
   transition: border-color 0.15s ease;
