@@ -18,11 +18,11 @@ Portal web del movimiento político **CO Politica Centro** (Colombia). Plantilla
 
 ## Idioma
 
-| Canal | Idioma |
-| --- | --- |
-| UI / README / docs | Español |
-| Commits | Inglés (Conventional Commits) |
-| Chat con el usuario | Español |
+| Canal               | Idioma                        |
+| ------------------- | ----------------------------- |
+| UI / README / docs  | Español                       |
+| Commits             | Inglés (Conventional Commits) |
+| Chat con el usuario | Español                       |
 
 ## Stack rápido
 

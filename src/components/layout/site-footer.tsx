@@ -1,3 +1,4 @@
+import { BrandMark } from "@/components/layout/brand-mark";
 import { site } from "@/content/site";
 
 export function SiteFooter() {
@@ -5,7 +6,7 @@ export function SiteFooter() {
     <footer className="border-foreground/10 bg-surface/60 border-t">
       <div className="container-page grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="space-y-3">
-          <p className="font-display text-lg font-semibold">{site.name}</p>
+          <BrandMark name={site.name} size={32} />
           <p className="text-muted max-w-md text-sm leading-relaxed">
             {site.description}
           </p>

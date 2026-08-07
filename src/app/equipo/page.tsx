@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/content/site";
+import { LeadershipDualPortrait } from "@/components/home/leadership-dual-portrait";
 
 export const metadata: Metadata = {
   title: "Equipo",
@@ -13,14 +14,17 @@ export default function EquipoPage() {
 
   return (
     <div className="section-space">
-      <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.1fr]">
-        <div>
-          <p className="eyebrow">Equipo</p>
-          <h1 className="section-title mt-4">{leadership.name}</h1>
-          <p className="text-brand-green mt-3 text-lg font-semibold">
-            {leadership.role}
-          </p>
-          <p className="text-muted mt-1">{leadership.location}</p>
+      <div className="container-page grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div className="space-y-6">
+          <LeadershipDualPortrait size="hero" className="lg:mx-0" />
+          <div>
+            <p className="eyebrow">Equipo</p>
+            <h1 className="section-title mt-4">{leadership.name}</h1>
+            <p className="text-brand-green mt-3 text-lg font-semibold">
+              {leadership.role}
+            </p>
+            <p className="text-muted mt-1">{leadership.location}</p>
+          </div>
         </div>
 
         <div className="space-y-6">

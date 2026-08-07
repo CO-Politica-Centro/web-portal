@@ -70,16 +70,16 @@ docs(readme): document Vercel production URL
 
 ## Tipos
 
-| Tipo | Uso aquí |
-| --- | --- |
-| `feat` | UI, rutas, contenido visible |
-| `fix` | Bugs, regresiones |
-| `docs` | README, docs, comandos Cursor |
-| `refactor` | Reorganización sin cambio de comportamiento |
-| `style` / `chore` | Formato, tokens, deps, scripts, `.cursor/` |
-| `perf` | Rendimiento |
-| `ci` | `.github/workflows/` |
-| `test` | Vitest / pruebas |
+| Tipo              | Uso aquí                                    |
+| ----------------- | ------------------------------------------- |
+| `feat`            | UI, rutas, contenido visible                |
+| `fix`             | Bugs, regresiones                           |
+| `docs`            | README, docs, comandos Cursor               |
+| `refactor`        | Reorganización sin cambio de comportamiento |
+| `style` / `chore` | Formato, tokens, deps, scripts, `.cursor/`  |
+| `perf`            | Rendimiento                                 |
+| `ci`              | `.github/workflows/`                        |
+| `test`            | Vitest / pruebas                            |
 
 **Evitar** encadenar `feat: … feat: …` en una sola línea.
 

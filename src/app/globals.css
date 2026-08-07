@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f7f4eb;
   --foreground: #1a1f16;
@@ -14,6 +16,19 @@
   --section-space: 4rem;
   --max-w-prose: 65ch;
   --max-w-page: 72rem;
+}
+
+.dark {
+  --background: #121510;
+  --foreground: #f2efe6;
+  --accent: #e0b020;
+  --accent-soft: #c9a227;
+  --brand-green: #6db87a;
+  --muted: #a8b09e;
+  --surface: #1c211a;
+  --ring: #f2efe6;
+  --border-subtle: color-mix(in srgb, var(--foreground) 14%, transparent);
+  --focus-ring: #f2efe6;
 }
 
 @media (min-width: 768px) {
@@ -34,19 +49,41 @@
   --font-sans: var(--font-source);
 }
 
-body {
+/* Wash on html (not body::before) so it isn't covered by html's solid fill */
+html {
   background:
     radial-gradient(
-      ellipse 80% 50% at 10% -10%,
-      rgb(232 197 71 / 0.35),
-      transparent
+      ellipse 90% 70% at 8% -5%,
+      rgb(232 197 71 / 0.32),
+      transparent 72%
     ),
     radial-gradient(
-      ellipse 60% 40% at 90% 0%,
+      ellipse 70% 55% at 92% 0%,
       rgb(47 107 58 / 0.12),
-      transparent
+      transparent 70%
     ),
     var(--background);
+  background-attachment: fixed;
+}
+
+html.dark {
+  background:
+    radial-gradient(
+      ellipse 90% 70% at 8% -5%,
+      rgb(224 176 32 / 0.14),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 92% 0%,
+      rgb(109 184 122 / 0.1),
+      transparent 70%
+    ),
+    var(--background);
+  background-attachment: fixed;
+}
+
+body {
+  background-color: transparent;
   color: var(--foreground);
   font-family: var(--font-source), ui-sans-serif, system-ui, sans-serif;
 }
