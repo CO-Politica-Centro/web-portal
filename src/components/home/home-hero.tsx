@@ -64,6 +64,12 @@ export function HomeHero() {
             >
               Únete a las comunidades
             </ExternalLink>
+            <ExternalLink
+              href={site.urls.capacitacion}
+              className="btn-secondary sm:w-auto"
+            >
+              Capacitación
+            </ExternalLink>
           </div>
           <nav aria-label="En esta página" className="mt-8">
             <ul className="text-muted flex flex-wrap gap-x-4 gap-y-2 text-sm">

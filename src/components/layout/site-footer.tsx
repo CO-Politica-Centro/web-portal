@@ -66,6 +66,14 @@ export function SiteFooter() {
                 </LinkUnderline>
               </ExternalLink>
             </li>
+            <li>
+              <ExternalLink
+                className="group text-brand-green inline-flex min-h-11 items-center text-base font-medium"
+                href={site.urls.capacitacion}
+              >
+                <LinkUnderline from="start">Capacitación</LinkUnderline>
+              </ExternalLink>
+            </li>
           </ul>
         </div>
 

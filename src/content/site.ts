@@ -70,6 +70,7 @@ export const site = {
   eyebrow: "Movimiento político · Colombia",
   urls: {
     beacons: "https://beacons.ai/centropd",
+    capacitacion: "https://web-capacitacion-co-politica.vercel.app",
     linktree: "https://linktr.ee/rafaelsolanov",
     email: "rafaelsolanov@web.de",
     discord: "https://discord.gg/VKjgAbDDvC",

@@ -11,6 +11,9 @@ describe("site content", () => {
   it("expone contacto y comunidades oficiales", () => {
     expect(site.urls.email).toContain("@");
     expect(site.urls.beacons).toMatch(/^https:\/\//);
+    expect(site.urls.capacitacion).toBe(
+      "https://web-capacitacion-co-politica.vercel.app",
+    );
     expect(site.nav.some((item) => item.external)).toBe(true);
   });
 });
