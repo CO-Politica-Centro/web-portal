@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/brand-mark";
+import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 
 const year = new Date().getFullYear();
@@ -21,14 +22,12 @@ export function SiteFooter() {
             {site.nav.map((item) => (
               <li key={item.href}>
                 {item.external ? (
-                  <a
+                  <ExternalLink
                     className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     {item.label}
-                  </a>
+                  </ExternalLink>
                 ) : (
                   <Link
                     className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
@@ -54,14 +53,12 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a
+              <ExternalLink
                 className="text-brand-green inline-flex min-h-11 items-center text-base font-medium underline-offset-4 hover:underline"
                 href={site.urls.beacons}
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Comunidades en Beacons
-              </a>
+              </ExternalLink>
             </li>
           </ul>
         </div>
@@ -71,14 +68,12 @@ export function SiteFooter() {
           <ul className="space-y-1">
             {site.leadership.links.map((item) => (
               <li key={item.href}>
-                <a
+                <ExternalLink
                   className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
                   href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {item.label}
-                </a>
+                </ExternalLink>
               </li>
             ))}
           </ul>

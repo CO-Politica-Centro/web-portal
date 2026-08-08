@@ -1,3 +1,4 @@
+import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -44,10 +45,8 @@ export function HomeNetworks() {
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
             {networks.profiles.map((profile) => (
               <li key={profile.id}>
-                <a
+                <ExternalLink
                   href={profile.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className={cn(
                     "bg-surface border-foreground/10 group flex h-full flex-col gap-4 border p-5 transition-[border-color,transform]",
                     "hover:border-brand-green/50 focus-visible:border-brand-green",
@@ -68,7 +67,7 @@ export function HomeNetworks() {
                   <span className="text-brand-green text-sm font-semibold underline-offset-4 group-hover:underline">
                     {profile.cta}
                   </span>
-                </a>
+                </ExternalLink>
               </li>
             ))}
           </ul>
@@ -86,10 +85,8 @@ export function HomeNetworks() {
           <ul className="mt-10 grid gap-4 md:grid-cols-3">
             {whatsappNetwork.hubs.map((hub) => (
               <li key={hub.href}>
-                <a
+                <ExternalLink
                   href={hub.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="bg-surface border-foreground/10 hover:border-accent/60 flex h-full flex-col gap-3 border p-6 transition-colors"
                 >
                   <p className="font-display text-xl font-semibold">
@@ -101,7 +98,7 @@ export function HomeNetworks() {
                   <span className="text-brand-green mt-auto pt-2 text-sm font-semibold underline-offset-4 hover:underline">
                     Abrir
                   </span>
-                </a>
+                </ExternalLink>
               </li>
             ))}
           </ul>
@@ -113,31 +110,27 @@ export function HomeNetworks() {
             <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {whatsappNetwork.featuredGroups.map((group) => (
                 <li key={group.href}>
-                  <a
+                  <ExternalLink
                     href={group.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="border-foreground/10 bg-surface hover:border-brand-green/50 flex min-h-11 items-center justify-between gap-3 border px-4 py-3 transition-colors"
                   >
                     <span className="font-semibold">{group.label}</span>
                     <span className="text-brand-green text-sm font-semibold">
                       Unirse
                     </span>
-                  </a>
+                  </ExternalLink>
                 </li>
               ))}
             </ul>
             <p className="text-muted mt-5 text-sm leading-relaxed">
               Hay {whatsappNetwork.groups.length} grupos regionales de WhatsApp
               en el directorio. Consulta el listado completo en{" "}
-              <a
+              <ExternalLink
                 href={urls.beacons}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-brand-green font-semibold underline-offset-4 hover:underline"
               >
                 beacons.ai/centropd
-              </a>
+              </ExternalLink>
               .
             </p>
           </div>

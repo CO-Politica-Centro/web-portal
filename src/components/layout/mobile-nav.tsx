@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ExternalLink } from "@/components/layout/external-link";
 
 export type NavItem = {
   href: string;
@@ -105,16 +106,14 @@ export function MobileNav({ items }: MobileNavProps) {
           <nav aria-label="Principal móvil" className="flex flex-col gap-2">
             {items.map((item) =>
               item.external ? (
-                <a
+                <ExternalLink
                   key={item.href}
                   href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium"
                   onClick={close}
                 >
                   {item.label}
-                </a>
+                </ExternalLink>
               ) : (
                 <Link
                   key={item.href}

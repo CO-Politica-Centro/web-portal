@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { BrandMark } from "@/components/layout/brand-mark";
+import { ExternalLink } from "@/components/layout/external-link";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { site } from "@/content/site";
@@ -41,15 +42,13 @@ export function SiteHeader() {
           >
             {navItems.map((item) =>
               item.external ? (
-                <a
+                <ExternalLink
                   key={item.href}
                   href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="hover:text-foreground inline-flex h-11 items-center leading-none underline-offset-4 transition-colors hover:underline"
                 >
                   {item.label}
-                </a>
+                </ExternalLink>
               ) : (
                 <Link
                   key={item.href}

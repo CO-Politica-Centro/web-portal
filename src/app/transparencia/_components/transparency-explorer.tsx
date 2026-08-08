@@ -114,6 +114,7 @@ export function TransparencyExplorer() {
     transparency.categories[0]?.id ?? "",
   );
   const headingId = useId();
+  const baseId = useId();
   const active =
     transparency.categories.find((c) => c.id === activeId) ??
     transparency.categories[0];
@@ -124,14 +125,18 @@ export function TransparencyExplorer() {
       <div className="space-y-3 lg:hidden">
         {transparency.categories.map((category) => {
           const open = category.id === activeId;
+          const panelId = `${baseId}-panel-${category.id}`;
+          const buttonId = `${baseId}-button-${category.id}`;
           return (
             <div
               key={category.id}
               className="border-foreground/10 bg-surface overflow-hidden rounded-xl border"
             >
               <button
+                id={buttonId}
                 type="button"
                 aria-expanded={open}
+                aria-controls={panelId}
                 onClick={() =>
                   setActiveId((id) => (id === category.id ? "" : category.id))
                 }
@@ -153,11 +158,15 @@ export function TransparencyExplorer() {
                   ›
                 </span>
               </button>
-              {open ? (
-                <div className="border-foreground/10 border-t px-4 py-4">
-                  <CategoryDetail category={category} />
-                </div>
-              ) : null}
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={buttonId}
+                hidden={!open}
+                className="border-foreground/10 border-t px-4 py-4"
+              >
+                {open ? <CategoryDetail category={category} /> : null}
+              </div>
             </div>
           );
         })}

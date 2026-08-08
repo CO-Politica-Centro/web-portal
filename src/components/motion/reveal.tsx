@@ -28,10 +28,12 @@ export function Reveal({ children, className, stagger }: RevealProps) {
 
       gsap.from(targets, {
         y: 32,
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.65,
         ease: "power2.out",
         stagger: stagger ? 0.06 : 0,
+        immediateRender: false,
+        clearProps: "transform,opacity,visibility",
         scrollTrigger: {
           trigger: root,
           start: "top 85%",

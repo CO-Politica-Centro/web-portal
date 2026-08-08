@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -37,14 +38,9 @@ export default function ContactoPage() {
               Directorio oficial de grupos y redes:
             </dd>
             <dd className="mt-2">
-              <a
-                className="btn-primary"
-                href={site.urls.beacons}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink className="btn-primary" href={site.urls.beacons}>
                 Abrir Beacons
-              </a>
+              </ExternalLink>
             </dd>
           </div>
           <div>
@@ -53,14 +49,12 @@ export default function ContactoPage() {
               <ul className="flex flex-wrap gap-x-5 gap-y-2">
                 {site.leadership.links.map((link) => (
                   <li key={link.href}>
-                    <a
+                    <ExternalLink
                       href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="text-brand-green inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
                     >
                       {link.label}
-                    </a>
+                    </ExternalLink>
                   </li>
                 ))}
               </ul>
