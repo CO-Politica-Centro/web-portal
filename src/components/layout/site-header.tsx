@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { isNavActive } from "@/lib/nav";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { ExternalLink } from "@/components/layout/external-link";
+import { LinkUnderline } from "@/components/layout/link-underline";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { site } from "@/content/site";
@@ -47,9 +48,9 @@ export function SiteHeader() {
                 <ExternalLink
                   key={item.href}
                   href={item.href}
-                  className="hover:text-foreground inline-flex h-11 items-center gap-1 leading-none underline-offset-4 transition-colors hover:underline"
+                  className="group hover:text-foreground inline-flex h-11 items-center gap-1 leading-none transition-colors"
                 >
-                  {item.label}
+                  <LinkUnderline>{item.label}</LinkUnderline>
                   <span aria-hidden="true" className="text-xs opacity-70">
                     ↗
                   </span>
@@ -60,11 +61,11 @@ export function SiteHeader() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "hover:text-foreground inline-flex h-11 items-center leading-none underline-offset-4 transition-colors hover:underline",
+                    "group hover:text-foreground inline-flex h-11 items-center leading-none transition-colors",
                     active && "text-foreground font-semibold",
                   )}
                 >
-                  {item.label}
+                  <LinkUnderline>{item.label}</LinkUnderline>
                 </Link>
               );
             })}

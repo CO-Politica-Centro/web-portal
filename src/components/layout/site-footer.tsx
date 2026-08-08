@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { ExternalLink } from "@/components/layout/external-link";
+import { LinkUnderline } from "@/components/layout/link-underline";
 import { site } from "@/content/site";
 
 export function SiteFooter() {
@@ -23,20 +24,20 @@ export function SiteFooter() {
               <li key={item.href}>
                 {item.external ? (
                   <ExternalLink
-                    className="text-muted hover:text-foreground inline-flex min-h-11 items-center gap-1 text-base underline-offset-4 hover:underline"
+                    className="group text-muted hover:text-foreground inline-flex min-h-11 items-center gap-1 text-base"
                     href={item.href}
                   >
-                    {item.label}
+                    <LinkUnderline from="start">{item.label}</LinkUnderline>
                     <span aria-hidden="true" className="text-xs opacity-70">
                       ↗
                     </span>
                   </ExternalLink>
                 ) : (
                   <Link
-                    className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
+                    className="group text-muted hover:text-foreground inline-flex min-h-11 items-center text-base"
                     href={item.href}
                   >
-                    {item.label}
+                    <LinkUnderline from="start">{item.label}</LinkUnderline>
                   </Link>
                 )}
               </li>
@@ -49,18 +50,20 @@ export function SiteFooter() {
           <ul className="space-y-1">
             <li>
               <a
-                className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
+                className="group text-muted hover:text-foreground inline-flex min-h-11 items-center text-base"
                 href={`mailto:${site.urls.email}`}
               >
-                {site.urls.email}
+                <LinkUnderline from="start">{site.urls.email}</LinkUnderline>
               </a>
             </li>
             <li>
               <ExternalLink
-                className="text-brand-green inline-flex min-h-11 items-center text-base font-medium underline-offset-4 hover:underline"
+                className="group text-brand-green inline-flex min-h-11 items-center text-base font-medium"
                 href={site.urls.beacons}
               >
-                Comunidades en Beacons
+                <LinkUnderline from="start">
+                  Comunidades en Beacons
+                </LinkUnderline>
               </ExternalLink>
             </li>
           </ul>
@@ -72,10 +75,10 @@ export function SiteFooter() {
             {site.leadership.links.map((item) => (
               <li key={item.href}>
                 <ExternalLink
-                  className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
+                  className="group text-muted hover:text-foreground inline-flex min-h-11 items-center text-base"
                   href={item.href}
                 >
-                  {item.label}
+                  <LinkUnderline from="start">{item.label}</LinkUnderline>
                 </ExternalLink>
               </li>
             ))}
