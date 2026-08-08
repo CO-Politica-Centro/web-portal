@@ -20,7 +20,7 @@ const body = Source_Sans_3({
   display: "swap",
 });
 
-const FALLBACK_SITE_URL = "http://localhost:3000";
+const FALLBACK_SITE_URL = "https://web-portal-co-politica.vercel.app";
 
 function resolveMetadataBase(): URL {
   const raw = process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
