@@ -1,10 +1,8 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { VolunteerDialog } from "@/features/voluntariado/volunteer-dialog";
 import type { VolunteerProject } from "@/features/voluntariado/types";
-import { getFirebaseClient } from "@/lib/firebase/client";
 import { useFirebaseAuth } from "@/lib/firebase/auth-context";
 
 type ApplyModalProps = {
@@ -29,14 +27,23 @@ export function ApplyModal({ project, onClose }: ApplyModalProps) {
     setPending(true);
     setError(null);
     try {
-      const client = getFirebaseClient();
-      if (!client) throw new Error("Firebase no configurado");
-      await addDoc(collection(client.db, "applications"), {
-        uid: user.uid,
-        projectId: activeProject.id,
-        message: message.trim(),
-        createdAt: serverTimestamp(),
+      const idToken = await user.getIdToken();
+      const response = await fetch("/api/voluntariado/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idToken,
+          uid: user.uid,
+          projectId: activeProject.id,
+          message: message.trim(),
+        }),
       });
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(payload?.error ?? "No se pudo enviar la postulación");
+      }
       setDone(true);
     } catch (err) {
       setError(

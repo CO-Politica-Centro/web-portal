@@ -1,18 +1,72 @@
-rules_version='2'
-
+rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      allow read, write: if request.time < timestamp.date(2026, 9, 6);
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // Catalog is served from the Next.js seed; no client Firestore access.
+    match /volunteerProjects/{projectId} {
+      allow read, write: if false;
+    }
+
+    match /projects/{projectId} {
+      allow read, write: if false;
+    }
+
+    // Each volunteer may only manage their own talent document.
+    match /volunteerTalents/{uid} {
+      allow get: if isSelf(uid);
+      allow list: if false;
+      allow create: if isSelf(uid)
+        && request.resource.data.keys().hasOnly([
+          'displayName',
+          'headline',
+          'availability',
+          'bio',
+          'skills',
+          'categories',
+          'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.displayName is string
+        && request.resource.data.headline is string
+        && request.resource.data.availability is string
+        && request.resource.data.bio is string
+        && request.resource.data.skills is list
+        && request.resource.data.categories is list;
+      allow update: if isSelf(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'displayName',
+          'headline',
+          'availability',
+          'bio',
+          'skills',
+          'categories',
+          'updatedAt'
+        ]);
+      allow delete: if isSelf(uid);
+    }
+
+    match /projectApplications/{applicationId} {
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+          'uid',
+          'projectId',
+          'message',
+          'createdAt'
+        ])
+        && request.resource.data.projectId is string
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 2000;
+      allow get: if signedIn() && resource.data.uid == request.auth.uid;
+      allow list, update, delete: if false;
     }
   }
 }

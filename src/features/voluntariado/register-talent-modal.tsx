@@ -1,13 +1,11 @@
 "use client";
 
 import { useId, useMemo, useState, type FormEvent } from "react";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { VolunteerDialog } from "@/features/voluntariado/volunteer-dialog";
 import {
   VOLUNTEER_CATEGORIES,
   type VolunteerCategoryId,
 } from "@/features/voluntariado/types";
-import { getFirebaseClient } from "@/lib/firebase/client";
 import { useFirebaseAuth } from "@/lib/firebase/auth-context";
 
 type RegisterTalentModalProps = {
@@ -57,22 +55,32 @@ export function RegisterTalentModal({
     setPending(true);
     setError(null);
     try {
-      const client = getFirebaseClient();
-      if (!client) throw new Error("Firebase no configurado");
-      const skillList = skills
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
-      await setDoc(doc(client.db, "talentProfiles", user.uid), {
-        displayName: displayName.trim(),
-        headline: headline.trim(),
-        availability: availability.trim(),
-        bio: bio.trim(),
-        skills: skillList,
-        categories,
-        updatedAt: serverTimestamp(),
-        createdAt: serverTimestamp(),
+      const skillList: string[] = [];
+      for (const part of skills.split(",")) {
+        const trimmed = part.trim();
+        if (trimmed) skillList.push(trimmed);
+      }
+      const idToken = await user.getIdToken();
+      const response = await fetch("/api/voluntariado/talent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idToken,
+          uid: user.uid,
+          displayName: displayName.trim(),
+          headline: headline.trim(),
+          availability: availability.trim(),
+          bio: bio.trim(),
+          skills: skillList,
+          categories,
+        }),
       });
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(payload?.error ?? "No se pudo guardar el perfil");
+      }
       setDone(true);
       onSaved?.();
     } catch (err) {

@@ -1,55 +1,57 @@
 import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth } from "firebase/auth";
-import { getFirestore, type Firestore } from "firebase/firestore";
 
 export type FirebaseClient = {
   app: FirebaseApp;
-  auth: Auth;
-  db: Firestore;
 };
 
-function readConfig() {
-  const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
-  const authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN;
-  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
-  const messagingSenderId =
-    process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
-  const appId = process.env.NEXT_PUBLIC_FIREBASE_APP_ID;
+type PublicFirebaseConfig = {
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+  storageBucket: string;
+  messagingSenderId: string;
+  appId: string;
+};
 
-  if (
-    !apiKey ||
-    !authDomain ||
-    !projectId ||
-    !storageBucket ||
-    !messagingSenderId ||
-    !appId
-  ) {
+let cachedConfig: PublicFirebaseConfig | null | undefined;
+let appPromise: Promise<FirebaseApp | null> | null = null;
+
+async function loadPublicConfig(): Promise<PublicFirebaseConfig | null> {
+  if (cachedConfig !== undefined) return cachedConfig;
+  try {
+    const response = await fetch("/api/firebase/public-config", {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      cachedConfig = null;
+      return null;
+    }
+    const payload = (await response.json()) as {
+      configured?: boolean;
+      config?: PublicFirebaseConfig;
+    };
+    cachedConfig = payload.configured && payload.config ? payload.config : null;
+    return cachedConfig;
+  } catch {
+    cachedConfig = null;
     return null;
   }
-
-  return {
-    apiKey,
-    authDomain,
-    projectId,
-    storageBucket,
-    messagingSenderId,
-    appId,
-  };
 }
 
-export function isFirebaseConfigured(): boolean {
-  return readConfig() !== null;
+async function getFirebaseApp(): Promise<FirebaseApp | null> {
+  if (!appPromise) {
+    appPromise = (async () => {
+      const config = await loadPublicConfig();
+      if (!config) return null;
+      return getApps().length > 0 ? getApps()[0]! : initializeApp(config);
+    })();
+  }
+  return appPromise;
 }
 
-export function getFirebaseClient(): FirebaseClient | null {
-  const config = readConfig();
-  if (!config) return null;
-
-  const app = getApps().length > 0 ? getApps()[0]! : initializeApp(config);
-  return {
-    app,
-    auth: getAuth(app),
-    db: getFirestore(app),
-  };
+export async function getFirebaseAuth() {
+  const app = await getFirebaseApp();
+  if (!app) return null;
+  const { getAuth } = await import("firebase/auth");
+  return getAuth(app);
 }

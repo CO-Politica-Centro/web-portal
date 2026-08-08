@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { useMemo, useRef, useState } from "react";
 import { ApplyModal } from "@/features/voluntariado/apply-modal";
 import { AuthModal } from "@/features/voluntariado/auth-modal";
 import { ProjectCard } from "@/features/voluntariado/project-card";
@@ -13,11 +12,8 @@ import {
   filterProjects,
   filterTalents,
   type CategoryFilter,
-  type TalentProfile,
-  type VolunteerCategoryId,
   type VolunteerProject,
 } from "@/features/voluntariado/types";
-import { getFirebaseClient, isFirebaseConfigured } from "@/lib/firebase/client";
 import { useFirebaseAuth } from "@/lib/firebase/auth-context";
 import { cn } from "@/lib/utils";
 
@@ -25,136 +21,25 @@ type BoardTab = "projects" | "talents";
 type PendingAction =
   { type: "apply"; project: VolunteerProject } | { type: "register" };
 
-function mapTalentDoc(
-  id: string,
-  data: Record<string, unknown>,
-): TalentProfile | null {
-  if (
-    typeof data.displayName !== "string" ||
-    typeof data.headline !== "string" ||
-    typeof data.bio !== "string" ||
-    typeof data.availability !== "string" ||
-    !Array.isArray(data.skills) ||
-    !Array.isArray(data.categories)
-  ) {
-    return null;
-  }
-  return {
-    id,
-    displayName: data.displayName,
-    headline: data.headline,
-    bio: data.bio,
-    availability: data.availability,
-    skills: data.skills.filter((s): s is string => typeof s === "string"),
-    categories: data.categories.filter(
-      (c): c is VolunteerCategoryId => typeof c === "string",
-    ),
-  };
-}
-
-function mapProjectDoc(
-  id: string,
-  data: Record<string, unknown>,
-): VolunteerProject | null {
-  if (
-    typeof data.title !== "string" ||
-    typeof data.description !== "string" ||
-    typeof data.category !== "string" ||
-    typeof data.hoursLabel !== "string" ||
-    typeof data.status !== "string" ||
-    !Array.isArray(data.skills)
-  ) {
-    return null;
-  }
-  return {
-    id,
-    title: data.title,
-    description: data.description,
-    category: data.category as VolunteerCategoryId,
-    hoursLabel: data.hoursLabel,
-    status: data.status as VolunteerProject["status"],
-    skills: data.skills.filter((s): s is string => typeof s === "string"),
-    slotsFilled: typeof data.slotsFilled === "number" ? data.slotsFilled : 0,
-    slotsTotal: typeof data.slotsTotal === "number" ? data.slotsTotal : 1,
-  };
-}
-
 export function VoluntariadoBoard() {
   const { user, loading, logout, configured } = useFirebaseAuth();
   const [tab, setTab] = useState<BoardTab>("projects");
   const [category, setCategory] = useState<CategoryFilter>("all");
-  const [projects, setProjects] = useState<VolunteerProject[]>(SEED_PROJECTS);
-  const [talents, setTalents] = useState<TalentProfile[]>(SEED_TALENTS);
   const [authOpen, setAuthOpen] = useState(false);
   const [applyProject, setApplyProject] = useState<VolunteerProject | null>(
     null,
   );
   const [registerOpen, setRegisterOpen] = useState(false);
+  const [savedNotice, setSavedNotice] = useState<string | null>(null);
   const pendingActionRef = useRef<PendingAction | null>(null);
 
-  const refreshRemote = useCallback(async () => {
-    if (!isFirebaseConfigured()) return;
-    const client = getFirebaseClient();
-    if (!client) return;
-    try {
-      const [projectSnap, talentSnap] = await Promise.all([
-        getDocs(collection(client.db, "projects")),
-        getDocs(collection(client.db, "talentProfiles")),
-      ]);
-      const remoteProjects = projectSnap.docs
-        .map((d) => mapProjectDoc(d.id, d.data()))
-        .filter((p): p is VolunteerProject => p !== null);
-      const remoteTalents = talentSnap.docs
-        .map((d) => mapTalentDoc(d.id, d.data()))
-        .filter((t): t is TalentProfile => t !== null);
-      if (remoteProjects.length > 0) setProjects(remoteProjects);
-      if (remoteTalents.length > 0) {
-        setTalents([...SEED_TALENTS, ...remoteTalents]);
-      }
-    } catch {
-      // Keep seed data if remote fails (offline / rules / empty).
-    }
-  }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      if (!isFirebaseConfigured()) return;
-      const client = getFirebaseClient();
-      if (!client) return;
-      try {
-        const [projectSnap, talentSnap] = await Promise.all([
-          getDocs(collection(client.db, "projects")),
-          getDocs(collection(client.db, "talentProfiles")),
-        ]);
-        if (cancelled) return;
-        const remoteProjects = projectSnap.docs
-          .map((d) => mapProjectDoc(d.id, d.data()))
-          .filter((p): p is VolunteerProject => p !== null);
-        const remoteTalents = talentSnap.docs
-          .map((d) => mapTalentDoc(d.id, d.data()))
-          .filter((t): t is TalentProfile => t !== null);
-        if (remoteProjects.length > 0) setProjects(remoteProjects);
-        if (remoteTalents.length > 0) {
-          setTalents([...SEED_TALENTS, ...remoteTalents]);
-        }
-      } catch {
-        // Keep seed data if remote fails.
-      }
-    }
-    void load();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const visibleProjects = useMemo(
-    () => filterProjects(projects, category),
-    [projects, category],
+    () => filterProjects(SEED_PROJECTS, category),
+    [category],
   );
   const visibleTalents = useMemo(
-    () => filterTalents(talents, category),
-    [talents, category],
+    () => filterTalents(SEED_TALENTS, category),
+    [category],
   );
 
   function openPendingAction(action: PendingAction) {
@@ -234,8 +119,14 @@ export function VoluntariadoBoard() {
 
       {!configured ? (
         <p className="border-accent/40 bg-surface text-muted mt-4 rounded-md border-l-4 px-4 py-3 text-sm">
-          Modo demostración: datos locales. Configura Firebase para Auth y
-          guardado real.
+          Modo demostración: Auth no configurado. Añade `NEXT_PUBLIC_FIREBASE_*`
+          para habilitar postulaciones reales.
+        </p>
+      ) : null}
+
+      {savedNotice ? (
+        <p className="border-brand-green/40 bg-brand-green/10 text-foreground mt-4 rounded-md border-l-4 px-4 py-3 text-sm">
+          {savedNotice}
         </p>
       ) : null}
 
@@ -311,7 +202,11 @@ export function VoluntariadoBoard() {
       <RegisterTalentModal
         open={registerOpen}
         onClose={() => setRegisterOpen(false)}
-        onSaved={() => void refreshRemote()}
+        onSaved={() =>
+          setSavedNotice(
+            "Perfil enviado. El equipo del movimiento lo revisará para futuros proyectos.",
+          )
+        }
       />
     </div>
   );
