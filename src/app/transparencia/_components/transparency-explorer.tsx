@@ -188,7 +188,7 @@ export function TransparencyExplorer() {
                 <button
                   type="button"
                   onClick={() => setActiveId(category.id)}
-                  aria-current={selected ? "true" : undefined}
+                  aria-pressed={selected}
                   className={cn(
                     "flex min-h-12 w-full items-start gap-3 rounded-xl px-3 py-3 text-left transition-colors",
                     selected

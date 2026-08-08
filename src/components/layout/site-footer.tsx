@@ -23,10 +23,13 @@ export function SiteFooter() {
               <li key={item.href}>
                 {item.external ? (
                   <ExternalLink
-                    className="text-muted hover:text-foreground inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline"
+                    className="text-muted hover:text-foreground inline-flex min-h-11 items-center gap-1 text-base underline-offset-4 hover:underline"
                     href={item.href}
                   >
                     {item.label}
+                    <span aria-hidden="true" className="text-xs opacity-70">
+                      ↗
+                    </span>
                   </ExternalLink>
                 ) : (
                   <Link

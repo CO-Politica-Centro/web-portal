@@ -148,9 +148,9 @@ export function LeadershipDualPortrait({
         onMouseLeave={() => {
           if (!reduced && !busyRef.current && showAvatar) swapTo(false);
         }}
-        aria-labelledby={labelId}
-        aria-pressed={showAvatar}
         aria-label={secondaryLabel}
+        aria-describedby={labelId}
+        aria-pressed={showAvatar}
         className={cn(
           "group ring-background absolute z-10 overflow-hidden rounded-full bg-black shadow-lg ring-2 transition-[transform,box-shadow] hover:scale-105 focus-visible:scale-105",
           "min-h-11 min-w-11",
@@ -167,12 +167,7 @@ export function LeadershipDualPortrait({
           sizes={isHero ? "120px" : "80px"}
           className="object-cover object-center"
         />
-        <span
-          className={cn(
-            "bg-foreground/70 text-background pointer-events-none absolute inset-x-0 bottom-0 px-1 py-0.5 text-center text-[0.65rem] font-semibold tracking-wide uppercase",
-            "opacity-100 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100",
-          )}
-        >
+        <span className="bg-foreground/70 text-background pointer-events-none absolute inset-x-0 bottom-0 px-1 py-0.5 text-center text-[0.65rem] font-semibold tracking-wide uppercase">
           {showAvatar ? "Retrato" : "Canales"}
         </span>
       </button>

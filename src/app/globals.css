@@ -5,6 +5,7 @@
 :root {
   --background: #f7f4eb;
   --foreground: #1a1f16;
+  /* Accent gold: decorative only (borders/washes). Do not use as body text — contrast ~2.2:1. */
   --accent: #d4a017;
   --accent-soft: #e8c547;
   --brand-green: #2f6b3a;

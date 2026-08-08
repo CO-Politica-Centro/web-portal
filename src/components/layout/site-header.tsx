@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { isNavActive } from "@/lib/nav";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { ExternalLink } from "@/components/layout/external-link";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -40,29 +41,33 @@ export function SiteHeader() {
             aria-label="Principal"
             className="text-muted hidden h-full items-center gap-5 text-base md:flex"
           >
-            {navItems.map((item) =>
-              item.external ? (
+            {navItems.map((item) => {
+              const active = !item.external && isNavActive(pathname, item.href);
+              return item.external ? (
                 <ExternalLink
                   key={item.href}
                   href={item.href}
-                  className="hover:text-foreground inline-flex h-11 items-center leading-none underline-offset-4 transition-colors hover:underline"
+                  className="hover:text-foreground inline-flex h-11 items-center gap-1 leading-none underline-offset-4 transition-colors hover:underline"
                 >
                   {item.label}
+                  <span aria-hidden="true" className="text-xs opacity-70">
+                    ↗
+                  </span>
                 </ExternalLink>
               ) : (
                 <Link
                   key={item.href}
                   href={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "hover:text-foreground inline-flex h-11 items-center leading-none underline-offset-4 transition-colors hover:underline",
-                    pathname === item.href && "text-foreground font-semibold",
+                    active && "text-foreground font-semibold",
                   )}
                 >
                   {item.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
           </nav>
 
           <div className="flex h-11 items-center gap-2">

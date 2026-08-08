@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { isNavActive } from "@/lib/nav";
 import { ExternalLink } from "@/components/layout/external-link";
 
 export type NavItem = {
@@ -104,32 +105,35 @@ export function MobileNav({ items }: MobileNavProps) {
             </button>
           </div>
           <nav aria-label="Principal móvil" className="flex flex-col gap-2">
-            {items.map((item) =>
-              item.external ? (
+            {items.map((item) => {
+              const active = !item.external && isNavActive(pathname, item.href);
+              return item.external ? (
                 <ExternalLink
                   key={item.href}
                   href={item.href}
-                  className="hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium"
+                  className="hover:bg-foreground/5 inline-flex min-h-11 items-center gap-2 rounded-md px-3 py-3 text-base font-medium"
                   onClick={close}
                 >
                   {item.label}
+                  <span aria-hidden="true" className="text-xs opacity-70">
+                    ↗
+                  </span>
                 </ExternalLink>
               ) : (
                 <Link
                   key={item.href}
                   href={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "hover:bg-foreground/5 min-h-11 rounded-md px-3 py-3 text-base font-medium",
-                    pathname === item.href &&
-                      "bg-foreground/5 text-brand-green",
+                    active && "bg-foreground/5 text-brand-green",
                   )}
                   onClick={close}
                 >
                   {item.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
           </nav>
         </div>
       </dialog>
