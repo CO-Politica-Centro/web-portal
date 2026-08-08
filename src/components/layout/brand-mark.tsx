@@ -23,7 +23,7 @@ export function BrandMark({
       className={cn("inline-flex items-center gap-2.5 leading-none", className)}
     >
       <Image
-        src="/brand/logo-flor.png"
+        src="/brand/logo-flor.svg"
         alt=""
         width={size}
         height={size}
@@ -31,6 +31,7 @@ export function BrandMark({
         style={{ width: size, height: size }}
         priority={priority}
         sizes={`${size}px`}
+        unoptimized
       />
       {showName ? (
         <span
