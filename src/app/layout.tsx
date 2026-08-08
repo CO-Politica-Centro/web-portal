@@ -4,10 +4,7 @@ import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { SkipLink } from "@/components/layout/skip-link";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import {
-  JsonLdOrganization,
-  JsonLdWebsite,
-} from "@/components/seo/json-ld";
+import { JsonLdOrganization, JsonLdWebsite } from "@/components/seo/json-ld";
 import { site } from "@/content/site";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";

@@ -3,9 +3,9 @@ import { BrandMark } from "@/components/layout/brand-mark";
 import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 
-const year = new Date().getFullYear();
-
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="border-foreground/10 bg-surface border-t">
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-8 lg:gap-12">

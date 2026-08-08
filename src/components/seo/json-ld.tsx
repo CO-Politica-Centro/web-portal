@@ -1,11 +1,5 @@
 import { site } from "@/content/site";
-
-const FALLBACK_SITE_URL = "https://web-portal-co-politica.vercel.app";
-
-export function siteOrigin(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
-  return (URL.canParse(raw) ? new URL(raw) : new URL(FALLBACK_SITE_URL)).origin;
-}
+import { siteOrigin, toJsonLd } from "@/lib/site-url";
 
 export function JsonLdOrganization() {
   const origin = siteOrigin();
@@ -26,7 +20,7 @@ export function JsonLdOrganization() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
     />
   );
 }
@@ -49,7 +43,7 @@ export function JsonLdWebsite() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
     />
   );
 }
@@ -71,7 +65,7 @@ export function JsonLdFaqPage() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
     />
   );
 }
