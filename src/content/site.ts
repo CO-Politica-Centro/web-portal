@@ -80,6 +80,7 @@ export const site = {
     { href: "/", label: "Inicio" },
     { href: "/propuestas", label: "Propuestas" },
     { href: "/equipo", label: "Equipo" },
+    { href: "/voluntariado", label: "Voluntariado" },
     { href: "/transparencia", label: "Transparencia" },
     { href: "/contacto", label: "Contacto" },
     {

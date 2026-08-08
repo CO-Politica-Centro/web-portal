@@ -190,7 +190,7 @@ export function ColombiaRegionsMap({
               onClick={selectInternational}
               aria-pressed={showInternational}
               className={cn(
-                "border-foreground/10 bg-surface hover:border-brand-green/50 w-full rounded-xl border px-5 py-4 text-left transition-colors",
+                "border-foreground/10 bg-surface hover:border-brand-green/50 w-full cursor-pointer rounded-xl border px-5 py-4 text-left transition-colors",
                 showInternational && "border-brand-green/60 bg-brand-green/10",
               )}
             >

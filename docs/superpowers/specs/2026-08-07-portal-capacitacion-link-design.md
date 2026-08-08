@@ -23,13 +23,13 @@ El portal público no enlaza a la web hermana de capacitación. Quien llega al p
 
 ## Decisiones
 
-| Decisión | Elección |
-| --- | --- |
-| URL | `https://web-capacitacion-co-politica.vercel.app` |
-| Label | `Capacitación` |
-| Hero | Tercer botón, estilo `btn-secondary`, enlace externo |
-| Footer | Columna Contacto, debajo de Beacons |
-| Nav header | No |
+| Decisión   | Elección                                             |
+| ---------- | ---------------------------------------------------- |
+| URL        | `https://web-capacitacion-co-politica.vercel.app`    |
+| Label      | `Capacitación`                                       |
+| Hero       | Tercer botón, estilo `btn-secondary`, enlace externo |
+| Footer     | Columna Contacto, debajo de Beacons                  |
+| Nav header | No                                                   |
 
 ## Enfoque elegido
 

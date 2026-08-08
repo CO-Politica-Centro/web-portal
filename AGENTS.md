@@ -50,9 +50,10 @@ Calidad: `pnpm run ci`
 ## Estructura
 
 ```
-src/app/           # rutas (/, /propuestas, /equipo, /contacto)
+src/app/           # rutas (/, /propuestas, /equipo, /voluntariado, /contacto)
 src/components/    # UI compartida
-src/lib/           # utils (cn, etc.)
+src/features/      # features de página (p. ej. voluntariado)
+src/lib/           # utils (cn, firebase, etc.)
 src/hooks/         # hooks transversales
 .cursor/           # reglas y comandos del agente
 ```
