@@ -6,8 +6,9 @@ export function HomeLeadership() {
 
   return (
     <section
+      id="liderazgo"
       aria-labelledby="leadership-heading"
-      className="section-space border-foreground/10 border-t"
+      className="section-space border-foreground/10 scroll-mt-28 border-t"
     >
       <div className="container-page grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <LeadershipDualPortrait size="compact" className="lg:mx-0" />

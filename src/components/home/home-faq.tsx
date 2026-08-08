@@ -11,8 +11,9 @@ export function HomeFaq() {
 
   return (
     <section
+      id="faq"
       aria-labelledby="faq-heading"
-      className="section-space border-foreground/10 relative border-t"
+      className="section-space border-foreground/10 relative scroll-mt-28 border-t"
     >
       <div
         aria-hidden="true"

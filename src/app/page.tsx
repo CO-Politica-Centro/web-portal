@@ -9,10 +9,12 @@ import { HomeTransparency } from "@/components/home/home-transparency";
 import { HomeFaq } from "@/components/home/home-faq";
 import { HomeClosing } from "@/components/home/home-closing";
 import { Reveal } from "@/components/motion/reveal";
+import { JsonLdFaqPage } from "@/components/seo/json-ld";
 
 export default function HomePage() {
   return (
     <>
+      <JsonLdFaqPage />
       <HomeHero />
       <Reveal>
         <HomeAbout />

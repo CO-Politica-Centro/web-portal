@@ -3,10 +3,15 @@ import Link from "next/link";
 import { site } from "@/content/site";
 import { LeadershipDualPortrait } from "@/components/home/leadership-dual-portrait";
 
+const title = "Equipo";
+const description =
+  "Liderazgo de CO Politica Centro: Rafael Solano y un equipo en consolidación.";
+
 export const metadata: Metadata = {
-  title: "Equipo",
-  description:
-    "Liderazgo de CO Politica Centro: Rafael Solano y un equipo en consolidación.",
+  title,
+  description,
+  alternates: { canonical: "/equipo" },
+  openGraph: { title, description },
 };
 
 export default function EquipoPage() {

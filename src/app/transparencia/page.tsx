@@ -3,10 +3,15 @@ import Link from "next/link";
 import { site } from "@/content/site";
 import { TransparencyExplorer } from "./_components/transparency-explorer";
 
+const title = "Transparencia";
+const description =
+  "Transparencia activa de CO Politica Centro: identidad, organización, finanzas y hoja de ruta — con honestidad sobre lo disponible y lo pendiente.";
+
 export const metadata: Metadata = {
-  title: "Transparencia",
-  description:
-    "Transparencia activa de CO Politica Centro: identidad, organización, finanzas y hoja de ruta — con honestidad sobre lo disponible y lo pendiente.",
+  title,
+  description,
+  alternates: { canonical: "/transparencia" },
+  openGraph: { title, description },
 };
 
 export default function TransparenciaPage() {

@@ -3,8 +3,9 @@ import { site } from "@/content/site";
 export function HomeAbout() {
   return (
     <section
+      id="quienes-somos"
       aria-labelledby="about-heading"
-      className="section-space border-foreground/10 border-t"
+      className="section-space border-foreground/10 scroll-mt-28 border-t"
     >
       <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div>

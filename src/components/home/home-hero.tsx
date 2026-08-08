@@ -1,8 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 import { LeadershipDualPortrait } from "@/components/home/leadership-dual-portrait";
 import { ParallaxLite } from "@/components/motion/parallax-lite";
+
+const sectionLinks = [
+  { href: "#quienes-somos", label: "Quiénes somos" },
+  { href: "#propuestas", label: "Propuestas" },
+  { href: "#liderazgo", label: "Liderazgo" },
+  { href: "#comunidades", label: "Comunidades" },
+  { href: "#faq", label: "Preguntas" },
+] as const;
 
 export function HomeHero() {
   return (
@@ -23,13 +32,14 @@ export function HomeHero() {
           <p className="eyebrow">{site.eyebrow}</p>
           <div className="mt-6 flex items-center gap-4">
             <Image
-              src="/brand/logo-flor.png"
+              src="/brand/logo-flor.svg"
               alt=""
               width={72}
               height={72}
               className="aspect-square size-[72px] shrink-0 overflow-hidden rounded-full object-cover"
               priority
               sizes="72px"
+              unoptimized
             />
             <p className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               {site.name}
@@ -48,15 +58,27 @@ export function HomeHero() {
             <Link href="/propuestas" className="btn-primary sm:w-auto">
               Conoce las propuestas
             </Link>
-            <a
+            <ExternalLink
               href={site.urls.beacons}
-              target="_blank"
-              rel="noopener noreferrer"
               className="btn-secondary sm:w-auto"
             >
               Únete a las comunidades
-            </a>
+            </ExternalLink>
           </div>
+          <nav aria-label="En esta página" className="mt-8">
+            <ul className="text-muted flex flex-wrap gap-x-4 gap-y-2 text-sm">
+              {sectionLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="hover:text-foreground inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         <div className="order-1 flex flex-col items-center gap-4 lg:order-2">

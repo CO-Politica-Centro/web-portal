@@ -2,10 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/content/site";
 
+const title = "Propuestas";
+const description =
+  "Programa por pilares del movimiento CO Politica Centro: economía, seguridad, educación y democracia.";
+
 export const metadata: Metadata = {
-  title: "Propuestas",
-  description:
-    "Programa por pilares del movimiento CO Politica Centro: economía, seguridad, educación y democracia.",
+  title,
+  description,
+  alternates: { canonical: "/propuestas" },
+  openGraph: {
+    title,
+    description,
+  },
 };
 
 export default function PropuestasPage() {

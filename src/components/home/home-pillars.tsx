@@ -4,8 +4,9 @@ import { site } from "@/content/site";
 export function HomePillars() {
   return (
     <section
+      id="propuestas"
       aria-labelledby="pillars-heading"
-      className="section-space border-foreground/10 border-t"
+      className="section-space border-foreground/10 scroll-mt-28 border-t"
     >
       <div className="container-page">
         <p className="eyebrow">Programa</p>

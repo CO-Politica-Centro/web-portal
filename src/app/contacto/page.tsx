@@ -3,10 +3,15 @@ import Link from "next/link";
 import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 
+const title = "Contacto";
+const description =
+  "Contacto de prensa y participación de CO Politica Centro: email, Beacons y redes.";
+
 export const metadata: Metadata = {
-  title: "Contacto",
-  description:
-    "Contacto de prensa y participación de CO Politica Centro: email, Beacons y redes.",
+  title,
+  description,
+  alternates: { canonical: "/contacto" },
+  openGraph: { title, description },
 };
 
 export default function ContactoPage() {

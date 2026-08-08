@@ -4,6 +4,10 @@ import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { SkipLink } from "@/components/layout/skip-link";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import {
+  JsonLdOrganization,
+  JsonLdWebsite,
+} from "@/components/seo/json-ld";
 import { site } from "@/content/site";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
@@ -49,18 +53,18 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: "/brand/logo-flor-social.jpg",
-        width: 1024,
-        height: 1024,
-        alt: site.name,
+        url: "/brand/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — ${site.tagline}`,
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: site.tagline,
     description: site.description,
-    images: ["/brand/logo-flor-social.jpg"],
+    images: ["/brand/og-default.jpg"],
   },
 };
 
@@ -77,6 +81,8 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <JsonLdOrganization />
+        <JsonLdWebsite />
       </head>
       <body className="flex min-h-full flex-col antialiased">
         <SkipLink />

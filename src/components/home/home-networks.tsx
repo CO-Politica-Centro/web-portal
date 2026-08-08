@@ -29,8 +29,9 @@ export function HomeNetworks() {
 
   return (
     <section
+      id="comunidades"
       aria-labelledby="networks-heading"
-      className="section-space border-foreground/10 border-t"
+      className="section-space border-foreground/10 scroll-mt-28 border-t"
     >
       <div className="container-page space-y-16">
         <div>
@@ -104,27 +105,10 @@ export function HomeNetworks() {
           </ul>
 
           <div className="mt-10">
-            <p className="font-semibold tracking-wide uppercase">
-              Grupos regionales destacados
-            </p>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              {whatsappNetwork.featuredGroups.map((group) => (
-                <li key={group.href}>
-                  <ExternalLink
-                    href={group.href}
-                    className="border-foreground/10 bg-surface hover:border-brand-green/50 flex min-h-11 items-center justify-between gap-3 border px-4 py-3 transition-colors"
-                  >
-                    <span className="font-semibold">{group.label}</span>
-                    <span className="text-brand-green text-sm font-semibold">
-                      Unirse
-                    </span>
-                  </ExternalLink>
-                </li>
-              ))}
-            </ul>
-            <p className="text-muted mt-5 text-sm leading-relaxed">
+            <p className="text-muted text-sm leading-relaxed">
               Hay {whatsappNetwork.groups.length} grupos regionales de WhatsApp
-              en el directorio. Consulta el listado completo en{" "}
+              en el directorio oficial. Consulta el listado completo y únete
+              desde{" "}
               <ExternalLink
                 href={urls.beacons}
                 className="text-brand-green font-semibold underline-offset-4 hover:underline"
