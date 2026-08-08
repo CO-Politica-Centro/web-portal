@@ -39,7 +39,7 @@ export function HomeFaq() {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex min-h-14 w-full items-start gap-3 px-4 py-4 text-left sm:px-5"
+                    className="flex min-h-14 w-full cursor-pointer items-start gap-3 px-4 py-4 text-left sm:px-5"
                   >
                     <span
                       aria-hidden="true"

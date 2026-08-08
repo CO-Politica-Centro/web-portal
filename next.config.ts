@@ -1,12 +1,16 @@
 import type { NextConfig } from "next";
-import { createHash } from "node:crypto";
-import { themeInitScript } from "./src/lib/theme";
 
-const themeScriptHash = `sha256-${createHash("sha256").update(themeInitScript).digest("base64")}`;
+/**
+ * Do not add script-src hashes/nonces here without Next.js nonce wiring
+ * (proxy + dynamic rendering). A lone hash disables 'unsafe-inline' and
+ * blocks Next.js hydration / flight inline scripts.
+ */
+const isDev = process.env.NODE_ENV === "development";
 
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' '${themeScriptHash}' https://va.vercel-scripts.com`,
+  // unsafe-eval: React debug stacks in development only (not used in production).
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",

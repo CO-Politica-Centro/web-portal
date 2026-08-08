@@ -1,3 +1,4 @@
+import { ColombiaRegionsMap } from "@/components/home/colombia-regions-map";
 import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -104,19 +105,34 @@ export function HomeNetworks() {
             ))}
           </ul>
 
-          <div className="mt-10">
-            <p className="text-muted text-sm leading-relaxed">
-              Hay {whatsappNetwork.groups.length} grupos regionales de WhatsApp
-              en el directorio oficial. Consulta el listado completo y únete
-              desde{" "}
-              <ExternalLink
-                href={urls.beacons}
-                className="text-brand-green font-semibold underline-offset-4 hover:underline"
-              >
-                beacons.ai/centropd
-              </ExternalLink>
-              .
-            </p>
+          <div className="mt-14 space-y-6">
+            <div>
+              <p className="eyebrow">Territorio</p>
+              <h4 className="section-title mt-4 max-w-2xl">
+                Grupos regionales de WhatsApp
+              </h4>
+              <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
+                Selecciona tu departamento en el mapa para unirte al grupo
+                correspondiente. Hay {whatsappNetwork.groups.length} grupos en
+                el directorio; el listado completo también está en{" "}
+                <ExternalLink
+                  href={urls.beacons}
+                  className="text-brand-green font-semibold underline-offset-4 hover:underline"
+                >
+                  beacons.ai/centropd
+                </ExternalLink>
+                .
+              </p>
+            </div>
+
+            <ColombiaRegionsMap
+              groups={whatsappNetwork.groups}
+              beaconsHref={urls.beacons}
+              email={urls.email}
+              international={whatsappNetwork.groups.find(
+                (group) => group.label === "Internacional",
+              )}
+            />
           </div>
         </div>
       </div>
