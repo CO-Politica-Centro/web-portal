@@ -12,7 +12,7 @@ export function JsonLdOrganization() {
     logo: `${origin}/brand/logo-flor-512.png`,
     email: site.urls.email,
     sameAs: [
-      site.urls.beacons,
+      site.urls.discord,
       ...site.leadership.links.map((link) => link.href),
     ],
   };

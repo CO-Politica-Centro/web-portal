@@ -14,7 +14,7 @@ Guía para agentes (Cursor, Claude Code y similares) que trabajen en este reposi
 
 ## Qué es
 
-Portal web del movimiento político **CO Politica Centro** (Colombia). Plantilla Next.js lista para contenido; org: https://github.com/CO-Politica-Centro — comunidades: https://beacons.ai/centropd
+Portal web del movimiento político **CO Politica Centro** (Colombia). Plantilla Next.js lista para contenido; org: https://github.com/CO-Politica-Centro — comunidad: https://discord.gg/VKjgAbDDvC
 
 ## Idioma
 

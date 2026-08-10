@@ -53,13 +53,13 @@ export function VolunteerDialog({
         onClose();
       }}
       className={cn(
-        "fixed inset-0 z-[60] m-0 flex h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-4 open:flex",
+        "text-foreground fixed inset-0 z-[60] m-0 flex h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-4 open:flex",
         "[&::backdrop]:bg-foreground/40",
       )}
     >
       <div
         className={cn(
-          "bg-surface border-foreground/10 w-full max-w-md rounded-xl border p-6 shadow-xl",
+          "bg-surface text-foreground border-foreground/10 w-full max-w-md rounded-xl border p-6 shadow-xl",
           className,
         )}
       >

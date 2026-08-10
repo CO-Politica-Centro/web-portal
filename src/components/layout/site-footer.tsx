@@ -59,11 +59,9 @@ export function SiteFooter() {
             <li>
               <ExternalLink
                 className="group text-brand-green inline-flex min-h-11 items-center text-base font-medium"
-                href={site.urls.beacons}
+                href={site.urls.discord}
               >
-                <LinkUnderline from="start">
-                  Comunidades en Beacons
-                </LinkUnderline>
+                <LinkUnderline from="start">Comunidad en Discord</LinkUnderline>
               </ExternalLink>
             </li>
             <li>

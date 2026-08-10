@@ -55,7 +55,7 @@ export const SEED_PROJECTS: VolunteerProject[] = [
   {
     id: "guion-redes",
     category: "comunicacion",
-    title: "Guiones cortos para redes y Beacons",
+    title: "Guiones cortos para redes y Discord",
     description:
       "Redacción de mensajes semanales alineados al tono institucional del portal.",
     skills: ["Copy", "Redes", "Edición"],

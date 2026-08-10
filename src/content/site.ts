@@ -69,7 +69,6 @@ export const site = {
     "Somos un movimiento en consolidación. Aún no somos un partido político inscrito ante la autoridad electoral.",
   eyebrow: "Movimiento político · Colombia",
   urls: {
-    beacons: "https://beacons.ai/centropd",
     capacitacion: "https://web-capacitacion-co-politica.vercel.app",
     linktree: "https://linktr.ee/rafaelsolanov",
     email: "rafaelsolanov@web.de",
@@ -84,7 +83,7 @@ export const site = {
     { href: "/transparencia", label: "Transparencia" },
     { href: "/contacto", label: "Contacto" },
     {
-      href: "https://beacons.ai/centropd",
+      href: "https://discord.gg/VKjgAbDDvC",
       label: "Comunidades",
       external: true,
     },
@@ -147,8 +146,8 @@ export const site = {
     },
     {
       title: "Comunidades activas",
-      text: "Canales y grupos del movimiento reunidos en un solo hub.",
-      href: "https://beacons.ai/centropd",
+      text: "Únete a Discord para conversar, organizarte y seguir al movimiento.",
+      href: "https://discord.gg/VKjgAbDDvC",
       external: true,
     },
     {
@@ -245,14 +244,8 @@ export const site = {
     eyebrow: "Directo y territorial",
     title: "Red de WhatsApp y comunidades",
     description:
-      "Grupos regionales, Discord y Telegram del movimiento. El directorio completo vive en Beacons.",
+      "Grupos regionales de WhatsApp, Discord y Telegram del movimiento.",
     hubs: [
-      {
-        label: "Hub Beacons",
-        href: "https://beacons.ai/centropd",
-        description:
-          "Directorio oficial de comunidades, grupos y puntos de encuentro.",
-      },
       {
         label: "Discord",
         href: "https://discord.gg/VKjgAbDDvC",
@@ -457,8 +450,8 @@ export const site = {
         "La forma más directa es sumarte a las comunidades del movimiento: grupos de WhatsApp por región, Discord y Telegram. También puedes escribirnos por el correo de contacto.",
       links: [
         {
-          label: "Abrir hub de comunidades",
-          href: "https://beacons.ai/centropd",
+          label: "Unirse a Discord",
+          href: "https://discord.gg/VKjgAbDDvC",
           external: true,
         },
         { label: "Ir a contacto", href: "/contacto" },
@@ -467,11 +460,11 @@ export const site = {
     {
       question: "¿Dónde están las comunidades y canales?",
       answer:
-        "El directorio oficial está en Beacons (beacons.ai/centropd). Allí encontrarás los grupos regionales de WhatsApp y otros canales del movimiento.",
+        "La comunidad principal está en Discord. También hay grupos regionales de WhatsApp en el mapa del inicio y un canal en Telegram.",
       links: [
         {
-          label: "beacons.ai/centropd",
-          href: "https://beacons.ai/centropd",
+          label: "Unirse a Discord",
+          href: "https://discord.gg/VKjgAbDDvC",
           external: true,
         },
       ],
@@ -497,9 +490,9 @@ export const site = {
   ] as FaqItem[],
   updates: [
     {
-      title: "Hub de comunidades y canales",
-      source: "Beacons",
-      href: "https://beacons.ai/centropd",
+      title: "Comunidad en Discord",
+      source: "Discord",
+      href: "https://discord.gg/VKjgAbDDvC",
     },
     {
       title: "Conversación pública en Instagram",
@@ -666,11 +659,11 @@ export const site = {
           "Dónde conversamos en público y cómo unirse sin intermediarios opacos.",
         items: [
           {
-            label: "Hub de comunidades (Beacons)",
+            label: "Comunidad en Discord",
             status: "available",
             summary:
-              "Directorio oficial de grupos, canales y redes del movimiento.",
-            href: "https://beacons.ai/centropd",
+              "Canal principal para conversar, organizarse y seguir al movimiento.",
+            href: "https://discord.gg/VKjgAbDDvC",
             external: true,
           },
           {

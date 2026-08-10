@@ -14,19 +14,19 @@ export function HomeClosing() {
         </h2>
         <p className="text-muted mt-4 text-lg leading-relaxed">
           Si quieres prensa, alianzas o sumarte a las comunidades, escribe o
-          entra al hub. Este movimiento se construye en público.
+          únete a Discord. Este movimiento se construye en público.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/contacto" className="btn-primary">
             Ir a contacto
           </Link>
           <a
-            href={site.urls.beacons}
+            href={site.urls.discord}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"
           >
-            Comunidades
+            Unirse a Discord
           </a>
         </div>
       </div>
