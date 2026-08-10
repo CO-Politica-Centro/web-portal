@@ -48,12 +48,12 @@ export default function EquipoPage() {
         </div>
 
         <div className="space-y-6">
-          <Reveal variant="up">
+          <Reveal variant="up" once>
             <p className="text-muted max-w-prose text-lg leading-relaxed">
               {leadership.bio}
             </p>
           </Reveal>
-          <Reveal variant="up">
+          <Reveal variant="up" once>
             <aside
               className="border-accent/40 bg-surface max-w-prose rounded-md border-l-4 px-4 py-3 text-sm leading-relaxed"
               role="note"
@@ -66,7 +66,7 @@ export default function EquipoPage() {
               </p>
             </aside>
           </Reveal>
-          <Reveal variant="fade" stagger="li">
+          <Reveal variant="fade" stagger="li" once>
             <ul className="flex flex-wrap gap-x-5 gap-y-2">
               {leadership.links.map((link) => (
                 <li key={link.href}>
@@ -82,7 +82,7 @@ export default function EquipoPage() {
               ))}
             </ul>
           </Reveal>
-          <Reveal variant="fade" mode="through">
+          <Reveal variant="fade" once>
             <div className="flex flex-col gap-3 pt-4 sm:flex-row">
               <Link href="/contacto" className="btn-primary">
                 Contacto

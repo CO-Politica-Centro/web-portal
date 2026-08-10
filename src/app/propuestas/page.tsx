@@ -90,7 +90,7 @@ export default function PropuestasPage() {
           ))}
         </div>
 
-        <Reveal variant="fade" mode="through" className="mt-16">
+        <Reveal variant="fade" once className="mt-16">
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href="/contacto" className="btn-primary">
               Hablar con el movimiento

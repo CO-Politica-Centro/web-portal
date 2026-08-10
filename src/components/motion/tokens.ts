@@ -8,9 +8,9 @@ export const MOTION = {
   hideEase: "power2.in",
   /** Smooth lag for scroll-linked reveals (seconds of catch-up). */
   scrub: 0.4,
-  /** Enter-only: progressive appear, then stays visible (reverses on scroll up). */
-  enterStart: "top 90%",
-  enterEnd: "top 48%",
+  /** Enter-only: short scrub so items are fully opaque while still low in the viewport. */
+  enterStart: "top 92%",
+  enterEnd: "top 75%",
   /** Through: full travel enter → hold → exit while scrolling the block. */
   throughStart: "top 92%",
   throughEnd: "bottom 12%",

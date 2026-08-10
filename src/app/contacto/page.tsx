@@ -33,7 +33,7 @@ export default function ContactoPage() {
           </p>
         </PageIntro>
 
-        <Reveal className="mt-12" stagger="dl > div">
+        <Reveal className="mt-12" stagger="dl > div" once>
           <dl className="space-y-8">
             <div>
               <dt className="font-semibold">Publicidad y prensa</dt>
@@ -77,7 +77,7 @@ export default function ContactoPage() {
           </dl>
         </Reveal>
 
-        <Reveal variant="fade" mode="through" className="mt-12">
+        <Reveal variant="fade" once className="mt-12">
           <p className="text-muted text-sm leading-relaxed" role="note">
             {site.disclaimer}
           </p>

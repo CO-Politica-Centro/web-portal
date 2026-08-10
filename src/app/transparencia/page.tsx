@@ -52,7 +52,7 @@ export default function TransparenciaPage() {
           <TransparencyExplorer />
         </div>
 
-        <Reveal variant="fade" mode="through" className="mt-12">
+        <Reveal variant="fade" once className="mt-12">
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href="/contacto" className="btn-primary sm:w-auto">
               Contacto
