@@ -14,6 +14,7 @@ import {
   type CategoryFilter,
   type VolunteerProject,
 } from "@/features/voluntariado/types";
+import { Reveal } from "@/components/motion/reveal";
 import { useFirebaseAuth } from "@/lib/firebase/auth-context";
 import { cn } from "@/lib/utils";
 
@@ -152,23 +153,33 @@ export function VoluntariadoBoard() {
         ))}
       </div>
 
-      {tab === "projects" ? (
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {visibleProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onApply={(p) => requireAuth({ type: "apply", project: p })}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {visibleTalents.map((talent) => (
-            <TalentCard key={talent.id} talent={talent} />
-          ))}
-        </div>
-      )}
+      <Reveal
+        key={`${tab}-${category}`}
+        className="mt-8"
+        stagger="[data-reveal-card]"
+        once
+      >
+        {tab === "projects" ? (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {visibleProjects.map((project) => (
+              <div key={project.id} data-reveal-card>
+                <ProjectCard
+                  project={project}
+                  onApply={(p) => requireAuth({ type: "apply", project: p })}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {visibleTalents.map((talent) => (
+              <div key={talent.id} data-reveal-card>
+                <TalentCard talent={talent} />
+              </div>
+            ))}
+          </div>
+        )}
+      </Reveal>
 
       <div className="border-foreground/10 bg-surface mt-14 flex flex-col gap-5 rounded-xl border p-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="max-w-2xl">

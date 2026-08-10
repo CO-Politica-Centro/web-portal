@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useId, useState } from "react";
+import { Reveal } from "@/components/motion/reveal";
 import {
   site,
   type TransparencyCategory,
@@ -86,7 +87,13 @@ function ItemBody({ item }: { item: TransparencyItem }) {
   );
 }
 
-function CategoryDetail({ category }: { category: TransparencyCategory }) {
+function CategoryDetail({
+  category,
+  revealKey,
+}: {
+  category: TransparencyCategory;
+  revealKey: string;
+}) {
   return (
     <div className="space-y-5">
       <div>
@@ -97,13 +104,15 @@ function CategoryDetail({ category }: { category: TransparencyCategory }) {
           {category.description}
         </p>
       </div>
-      <ul className="space-y-3">
-        {category.items.map((item) => (
-          <li key={item.label}>
-            <ItemBody item={item} />
-          </li>
-        ))}
-      </ul>
+      <Reveal key={revealKey} stagger="[data-reveal-item]" once>
+        <ul className="space-y-3">
+          {category.items.map((item) => (
+            <li key={item.label} data-reveal-item>
+              <ItemBody item={item} />
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </div>
   );
 }
@@ -165,7 +174,12 @@ export function TransparencyExplorer() {
                 hidden={!open}
                 className="border-foreground/10 border-t px-4 py-4"
               >
-                {open ? <CategoryDetail category={category} /> : null}
+                {open ? (
+                  <CategoryDetail
+                    category={category}
+                    revealKey={`mobile-${category.id}`}
+                  />
+                ) : null}
               </div>
             </div>
           );
@@ -223,7 +237,10 @@ export function TransparencyExplorer() {
               </span>
             </p>
             <div className="mt-6">
-              <CategoryDetail category={active} />
+              <CategoryDetail
+                category={active}
+                revealKey={`desktop-${active.id}`}
+              />
             </div>
           </>
         ) : null}
