@@ -53,7 +53,7 @@ export function VolunteerDialog({
         onClose();
       }}
       className={cn(
-        "text-foreground fixed inset-0 z-[60] m-0 flex h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-4 open:flex",
+        "text-foreground fixed inset-0 z-[60] m-0 hidden h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-4 open:flex",
         "[&::backdrop]:bg-foreground/40",
       )}
     >
