@@ -11,7 +11,7 @@ Producción: https://web-portal-co-politica.vercel.app
 - Nav accesible (skip link, menú móvil ARIA, `aria-current`)
 - Scroll motion con GSAP + respeto a `prefers-reduced-motion`
 - Contenido centralizado en `src/content/site.ts`
-- Hub de comunidades: https://beacons.ai/centropd
+- Comunidad en Discord: https://discord.gg/VKjgAbDDvC
 
 ## Stack
 
@@ -42,7 +42,8 @@ pnpm dev
 - Skip link “Saltar al contenido”
 - Landmarks `header` / `main#contenido` / `footer`
 - Menú móvil con Escape, focus trap y cierre al navegar
-- Con `prefers-reduced-motion: reduce` no hay reveals ni parallax
+- Motion con GSAP: `PageIntro` (carga inicial), `Reveal` (entrada/salida de viewport) y `ParallaxLite` (hero)
+- Con `prefers-reduced-motion: reduce` no hay reveals, intros ni parallax
 
 ## Despliegue (Vercel)
 
