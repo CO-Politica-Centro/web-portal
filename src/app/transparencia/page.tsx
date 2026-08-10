@@ -38,7 +38,7 @@ export default function TransparenciaPage() {
           </p>
         </PageIntro>
 
-        <Reveal variant="up" delay={0.05} className="mt-8">
+        <Reveal variant="up" className="mt-8">
           <div
             className="border-accent/40 bg-surface max-w-3xl rounded-md border-l-4 px-4 py-3 text-sm leading-relaxed"
             role="note"
@@ -52,7 +52,7 @@ export default function TransparenciaPage() {
           <TransparencyExplorer />
         </div>
 
-        <Reveal variant="fade" className="mt-12">
+        <Reveal variant="fade" mode="through" className="mt-12">
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href="/contacto" className="btn-primary sm:w-auto">
               Contacto

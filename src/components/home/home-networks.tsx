@@ -36,17 +36,19 @@ export function HomeNetworks() {
     >
       <div className="container-page space-y-16">
         <div>
-          <p className="eyebrow">{networks.eyebrow}</p>
-          <h2 id="networks-heading" className="section-title mt-4 max-w-2xl">
-            {networks.title}
-          </h2>
-          <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
-            {networks.description}
-          </p>
+          <div data-reveal-head>
+            <p className="eyebrow">{networks.eyebrow}</p>
+            <h2 id="networks-heading" className="section-title mt-4 max-w-2xl">
+              {networks.title}
+            </h2>
+            <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
+              {networks.description}
+            </p>
+          </div>
 
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
             {networks.profiles.map((profile) => (
-              <li key={profile.id}>
+              <li key={profile.id} data-reveal-item>
                 <ExternalLink
                   href={profile.href}
                   className={cn(
@@ -76,17 +78,19 @@ export function HomeNetworks() {
         </div>
 
         <div>
-          <p className="eyebrow">{whatsappNetwork.eyebrow}</p>
-          <h3 className="section-title mt-4 max-w-2xl">
-            {whatsappNetwork.title}
-          </h3>
-          <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
-            {whatsappNetwork.description}
-          </p>
+          <div data-reveal-head>
+            <p className="eyebrow">{whatsappNetwork.eyebrow}</p>
+            <h3 className="section-title mt-4 max-w-2xl">
+              {whatsappNetwork.title}
+            </h3>
+            <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
+              {whatsappNetwork.description}
+            </p>
+          </div>
 
-          <ul className="mt-10 grid gap-4 md:grid-cols-3">
+          <ul className="mt-10 grid gap-4 md:grid-cols-2">
             {whatsappNetwork.hubs.map((hub) => (
-              <li key={hub.href}>
+              <li key={hub.href} data-reveal-item>
                 <ExternalLink
                   href={hub.href}
                   className="bg-surface border-foreground/10 hover:border-accent/60 flex h-full flex-col gap-3 border p-6 transition-colors"
@@ -106,7 +110,7 @@ export function HomeNetworks() {
           </ul>
 
           <div className="mt-14 space-y-6">
-            <div>
+            <div data-reveal-head>
               <p className="eyebrow">Territorio</p>
               <h4 className="section-title mt-4 max-w-2xl">
                 Grupos regionales de WhatsApp
@@ -114,25 +118,27 @@ export function HomeNetworks() {
               <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
                 Selecciona tu departamento en el mapa para unirte al grupo
                 correspondiente. Hay {whatsappNetwork.groups.length} grupos en
-                el directorio; el listado completo también está en{" "}
+                el directorio; también puedes unirte a la{" "}
                 <ExternalLink
-                  href={urls.beacons}
+                  href={urls.discord}
                   className="text-brand-green font-semibold underline-offset-4 hover:underline"
                 >
-                  beacons.ai/centropd
+                  comunidad en Discord
                 </ExternalLink>
                 .
               </p>
             </div>
 
-            <ColombiaRegionsMap
-              groups={whatsappNetwork.groups}
-              beaconsHref={urls.beacons}
-              email={urls.email}
-              international={whatsappNetwork.groups.find(
-                (group) => group.label === "Internacional",
-              )}
-            />
+            <div data-reveal-item>
+              <ColombiaRegionsMap
+                groups={whatsappNetwork.groups}
+                discordHref={urls.discord}
+                email={urls.email}
+                international={whatsappNetwork.groups.find(
+                  (group) => group.label === "Internacional",
+                )}
+              />
+            </div>
           </div>
         </div>
       </div>

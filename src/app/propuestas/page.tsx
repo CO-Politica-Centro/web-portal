@@ -55,24 +55,27 @@ export default function PropuestasPage() {
 
         <div className="mt-16 space-y-16">
           {site.pillars.map((pillar, index) => (
-            <Reveal key={pillar.slug} variant="up" stagger="li">
+            <Reveal key={pillar.slug} variant="up" stagger="[data-reveal-item]">
               <article
                 id={pillar.slug}
                 className="border-foreground/10 scroll-mt-28 border-t pt-10"
               >
-                <p className="text-muted text-sm font-semibold tracking-wide">
-                  Pilar 0{index + 1}
-                </p>
-                <h2 className="font-display mt-3 text-3xl font-semibold">
-                  {pillar.title}
-                </h2>
-                <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
-                  {pillar.body}
-                </p>
+                <div data-reveal-head>
+                  <p className="text-muted text-sm font-semibold tracking-wide">
+                    Pilar 0{index + 1}
+                  </p>
+                  <h2 className="font-display mt-3 text-3xl font-semibold">
+                    {pillar.title}
+                  </h2>
+                  <p className="text-muted mt-4 max-w-prose text-lg leading-relaxed">
+                    {pillar.body}
+                  </p>
+                </div>
                 <ul className="mt-6 space-y-2">
                   {pillar.highlights.map((item) => (
                     <li
                       key={item}
+                      data-reveal-item
                       className="text-foreground/90 flex gap-3 text-base leading-relaxed"
                     >
                       <span className="text-brand-green" aria-hidden="true">
@@ -87,7 +90,7 @@ export default function PropuestasPage() {
           ))}
         </div>
 
-        <Reveal variant="fade" className="mt-16">
+        <Reveal variant="fade" mode="through" className="mt-16">
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href="/contacto" className="btn-primary">
               Hablar con el movimiento

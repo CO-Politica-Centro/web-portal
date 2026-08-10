@@ -8,22 +8,128 @@ import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { cn } from "@/lib/utils";
 import {
   MOTION,
+  variantExit,
   variantFrom,
+  type RevealMode,
   type RevealVariant,
 } from "@/components/motion/tokens";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+let refreshBound = false;
+
+function bindScrollTriggerRefresh() {
+  if (refreshBound || typeof window === "undefined") return;
+  refreshBound = true;
+  const refresh = () => ScrollTrigger.refresh();
+  window.addEventListener("load", refresh, { once: true });
+  void document.fonts?.ready.then(refresh);
+}
+
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
   variant?: RevealVariant;
+  /** Kept for `once` tweens only. */
   delay?: number;
   once?: boolean;
+  /** `enter` (default): scrub in and stay. `through`: scrub in → out (single target). */
+  mode?: RevealMode;
   amount?: number;
   stagger?: string;
   as?: "div" | "section";
 };
+
+function resolveTargets(
+  root: HTMLElement,
+  stagger: string | undefined,
+): HTMLElement[] {
+  const heads = gsap.utils.toArray<HTMLElement>(
+    root.querySelectorAll("[data-reveal-head]"),
+  );
+  if (stagger) {
+    const items = gsap.utils.toArray<HTMLElement>(
+      root.querySelectorAll(stagger),
+    );
+    const merged = [...heads, ...items];
+    if (merged.length > 0) return merged;
+  } else if (heads.length > 0) {
+    return heads;
+  }
+
+  const content = root.querySelector<HTMLElement>("[data-reveal-content]");
+  return content ? [content] : [];
+}
+
+function hiddenVars(variant: RevealVariant, amount: number) {
+  const base = {
+    ...variantFrom(variant, amount),
+    autoAlpha: 0,
+    transformOrigin: "50% 50%",
+  };
+  if (variant === "fade") return base;
+  return { ...base, scale: MOTION.scaleFrom };
+}
+
+function shownVars(variant: RevealVariant) {
+  if (variant === "fade") {
+    return { x: 0, y: 0, autoAlpha: 1 };
+  }
+  return { x: 0, y: 0, scale: 1, autoAlpha: 1 };
+}
+
+function exitVars(variant: RevealVariant, amount: number) {
+  const base = {
+    ...variantExit(variant, amount),
+    autoAlpha: 0,
+  };
+  if (variant === "fade") return base;
+  return { ...base, scale: MOTION.scaleFrom };
+}
+
+function scrubEnterElement(
+  el: HTMLElement,
+  hidden: gsap.TweenVars,
+  shown: gsap.TweenVars,
+) {
+  gsap.fromTo(el, hidden, {
+    ...shown,
+    ease: "none",
+    immediateRender: false,
+    scrollTrigger: {
+      trigger: el,
+      start: MOTION.enterStart,
+      end: MOTION.enterEnd,
+      scrub: MOTION.scrub,
+      invalidateOnRefresh: true,
+    },
+  });
+}
+
+function scrubThroughElement(
+  el: HTMLElement,
+  hidden: gsap.TweenVars,
+  shown: gsap.TweenVars,
+  exit: gsap.TweenVars,
+) {
+  const enterDur = MOTION.scrubEnter;
+  const exitDur = MOTION.scrubExit;
+  const exitAt = 1 - exitDur;
+
+  gsap
+    .timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: el,
+        start: MOTION.throughStart,
+        end: MOTION.throughEnd,
+        scrub: MOTION.scrub,
+        invalidateOnRefresh: true,
+      },
+    })
+    .fromTo(el, hidden, { ...shown, duration: enterDur }, 0)
+    .to(el, { ...exit, duration: exitDur }, exitAt);
+}
 
 export function Reveal({
   children,
@@ -31,6 +137,7 @@ export function Reveal({
   variant = "up",
   delay = 0,
   once = false,
+  mode = "enter",
   amount = MOTION.amount,
   stagger,
   as: Tag = "div",
@@ -43,79 +150,72 @@ export function Reveal({
       const root = ref.current;
       if (!root) return;
 
+      bindScrollTriggerRefresh();
+
       if (reduced) {
         root.classList.remove("is-pending");
         return;
       }
 
-      const content = root.querySelector<HTMLElement>("[data-reveal-content]");
-      const targets = stagger
-        ? gsap.utils.toArray<HTMLElement>(root.querySelectorAll(stagger))
-        : content
-          ? [content]
-          : [];
-
+      const targets = resolveTargets(root, stagger);
       if (targets.length === 0) {
         root.classList.remove("is-pending");
         return;
       }
 
-      const hidden = {
-        ...variantFrom(variant, amount),
-        autoAlpha: 0,
-        scale: MOTION.scaleFrom,
-        transformOrigin: "50% 50%",
-      };
+      const hidden = hiddenVars(variant, amount);
+      const shown = shownVars(variant);
+      const exit = exitVars(variant, amount);
+      const perElement = targets.length > 1;
 
-      // Keep trigger (root) layout-stable; only animate inner targets.
       gsap.set(targets, hidden);
       root.classList.remove("is-pending");
 
-      const show = () =>
-        gsap.to(targets, {
-          x: 0,
-          y: 0,
-          scale: 1,
-          autoAlpha: 1,
-          duration: MOTION.duration,
-          ease: MOTION.ease,
-          delay,
-          stagger: stagger ? MOTION.stagger : 0,
-          overwrite: "auto",
-        });
+      if (once) {
+        for (const el of targets) {
+          const show = () =>
+            gsap.to(el, {
+              ...shown,
+              duration: MOTION.duration,
+              ease: MOTION.ease,
+              delay,
+              overwrite: "auto",
+            });
 
-      const hide = () =>
-        gsap.to(targets, {
-          ...variantFrom(variant, amount),
-          autoAlpha: 0,
-          scale: MOTION.scaleFrom,
-          duration: MOTION.hideDuration,
-          ease: MOTION.hideEase,
-          stagger: stagger ? MOTION.stagger * 0.6 : 0,
-          overwrite: "auto",
-        });
+          const st = ScrollTrigger.create({
+            trigger: el,
+            start: MOTION.enterStart,
+            once: true,
+            onEnter: show,
+            invalidateOnRefresh: true,
+          });
 
-      const st = ScrollTrigger.create({
-        trigger: root,
-        start: MOTION.revealStart,
-        end: MOTION.revealEnd,
-        onEnter: show,
-        onEnterBack: show,
-        ...(once
-          ? { once: true }
-          : {
-              onLeave: hide,
-              onLeaveBack: hide,
-            }),
-        invalidateOnRefresh: true,
-      });
+          if (st.isActive) show();
+        }
+        return;
+      }
 
-      // If already inside the active range on mount, fire enter once.
-      if (st.isActive) show();
+      // Multi-target: each element owns its ScrollTrigger (no shared section scrub).
+      // through + multi → enter-per-item (avoid mid-section mass exit).
+      if (perElement) {
+        for (const el of targets) {
+          scrubEnterElement(el, hidden, shown);
+        }
+        return;
+      }
+
+      const [only] = targets;
+
+      if (mode === "through") {
+        scrubThroughElement(only, hidden, shown, exit);
+        return;
+      }
+
+      scrubEnterElement(only, hidden, shown);
     },
     {
       scope: ref,
-      dependencies: [reduced, stagger, variant, delay, once, amount],
+      dependencies: [reduced, stagger, variant, delay, once, amount, mode],
     },
   );
 

@@ -16,31 +16,31 @@ export default function HomePage() {
     <>
       <JsonLdFaqPage />
       <HomeHero />
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeAbout />
       </Reveal>
-      <Reveal variant="up" stagger="li">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomePillars />
       </Reveal>
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeHighlights />
       </Reveal>
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeLeadership />
       </Reveal>
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeUpdates />
       </Reveal>
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeNetworks />
       </Reveal>
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeTransparency />
       </Reveal>
-      <Reveal variant="up">
+      <Reveal variant="up" stagger="[data-reveal-item]">
         <HomeFaq />
       </Reveal>
-      <Reveal variant="fade" delay={0.05}>
+      <Reveal variant="fade" mode="through">
         <HomeClosing />
       </Reveal>
     </>

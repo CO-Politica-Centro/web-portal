@@ -39,7 +39,7 @@ export default function VoluntariadoPage() {
           </span>
         </PageIntro>
 
-        <Reveal variant="up" delay={0.05} className="mt-8">
+        <Reveal variant="up" className="mt-8">
           <div
             className="border-accent/40 bg-surface max-w-3xl rounded-md border-l-4 px-4 py-3 text-sm leading-relaxed"
             role="note"

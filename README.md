@@ -42,7 +42,7 @@ pnpm dev
 - Skip link “Saltar al contenido”
 - Landmarks `header` / `main#contenido` / `footer`
 - Menú móvil con Escape, focus trap y cierre al navegar
-- Motion con GSAP: `PageIntro` (carga inicial), `Reveal` (entrada/salida de viewport) y `ParallaxLite` (hero)
+- Motion con GSAP: `PageIntro` (carga), `Reveal` por elemento con scrub (`mode="through"` en cierres) y `ParallaxLite` (hero)
 - Script `motion-ok` pre-oculta intros antes de hidratar para que la carga se vea
 - Con `prefers-reduced-motion: reduce` no hay reveals, intros ni parallax
 

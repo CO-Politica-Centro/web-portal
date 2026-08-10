@@ -53,7 +53,7 @@ export default function EquipoPage() {
               {leadership.bio}
             </p>
           </Reveal>
-          <Reveal variant="up" delay={0.05}>
+          <Reveal variant="up">
             <aside
               className="border-accent/40 bg-surface max-w-prose rounded-md border-l-4 px-4 py-3 text-sm leading-relaxed"
               role="note"
@@ -82,7 +82,7 @@ export default function EquipoPage() {
               ))}
             </ul>
           </Reveal>
-          <Reveal variant="fade" delay={0.05}>
+          <Reveal variant="fade" mode="through">
             <div className="flex flex-col gap-3 pt-4 sm:flex-row">
               <Link href="/contacto" className="btn-primary">
                 Contacto

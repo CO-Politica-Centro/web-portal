@@ -77,7 +77,7 @@ export default function ContactoPage() {
           </dl>
         </Reveal>
 
-        <Reveal variant="fade" className="mt-12">
+        <Reveal variant="fade" mode="through" className="mt-12">
           <p className="text-muted text-sm leading-relaxed" role="note">
             {site.disclaimer}
           </p>

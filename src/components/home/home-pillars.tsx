@@ -9,19 +9,22 @@ export function HomePillars() {
       className="section-space border-foreground/10 scroll-mt-28 border-t"
     >
       <div className="container-page">
-        <p className="eyebrow">Programa</p>
-        <h2 id="pillars-heading" className="section-title mt-4 max-w-2xl">
-          Cuatro pilares para orientar el debate
-        </h2>
-        <p className="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
-          Ejes claros, al estilo de un portal temático moderno: para leer,
-          discutir y profundizar sin ruido.
-        </p>
+        <div data-reveal-head>
+          <p className="eyebrow">Programa</p>
+          <h2 id="pillars-heading" className="section-title mt-4 max-w-2xl">
+            Cuatro pilares para orientar el debate
+          </h2>
+          <p className="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
+            Ejes claros, al estilo de un portal temático moderno: para leer,
+            discutir y profundizar sin ruido.
+          </p>
+        </div>
 
         <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {site.pillars.map((pillar, index) => (
             <li
               key={pillar.slug}
+              data-reveal-item
               id={`pilar-${pillar.slug}`}
               className="border-foreground/10 bg-surface scroll-mt-28 rounded-2xl border p-6"
             >

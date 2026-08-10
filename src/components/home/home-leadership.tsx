@@ -11,9 +11,11 @@ export function HomeLeadership() {
       className="section-space border-foreground/10 scroll-mt-28 border-t"
     >
       <div className="container-page grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-        <LeadershipDualPortrait size="compact" className="lg:mx-0" />
+        <div data-reveal-item>
+          <LeadershipDualPortrait size="compact" className="lg:mx-0" />
+        </div>
         <div className="space-y-5">
-          <div>
+          <div data-reveal-head>
             <p className="eyebrow">Liderazgo</p>
             <h2 id="leadership-heading" className="section-title mt-4">
               {leadership.name}
@@ -23,10 +25,13 @@ export function HomeLeadership() {
             </p>
             <p className="text-muted mt-1 text-sm">{leadership.location}</p>
           </div>
-          <p className="text-muted max-w-prose text-lg leading-relaxed">
+          <p
+            data-reveal-item
+            className="text-muted max-w-prose text-lg leading-relaxed"
+          >
             {leadership.bio}
           </p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          <ul data-reveal-item className="flex flex-wrap gap-x-5 gap-y-2">
             {leadership.links.map((link) => (
               <li key={link.href}>
                 <a

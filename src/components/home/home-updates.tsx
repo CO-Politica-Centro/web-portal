@@ -7,18 +7,20 @@ export function HomeUpdates() {
       className="section-space border-foreground/10 border-t"
     >
       <div className="container-page">
-        <p className="eyebrow">Actualidad</p>
-        <h2 id="updates-heading" className="section-title mt-4 max-w-2xl">
-          Sigue la conversación donde ya estamos
-        </h2>
-        <p className="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
-          Todavía no publicamos un blog propio. Mientras tanto, la actualidad
-          del movimiento vive en los canales oficiales.
-        </p>
+        <div data-reveal-head>
+          <p className="eyebrow">Actualidad</p>
+          <h2 id="updates-heading" className="section-title mt-4 max-w-2xl">
+            Sigue la conversación donde ya estamos
+          </h2>
+          <p className="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
+            Todavía no publicamos un blog propio. Mientras tanto, la actualidad
+            del movimiento vive en los canales oficiales.
+          </p>
+        </div>
 
         <ul className="divide-foreground/10 border-foreground/10 mt-10 divide-y border-y">
           {site.updates.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} data-reveal-item>
               <a
                 href={item.href}
                 target="_blank"

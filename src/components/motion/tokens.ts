@@ -3,24 +3,33 @@ export const MOTION = {
   hideDuration: 0.85,
   introDuration: 1.1,
   introStagger: 0.12,
-  stagger: 0.12,
+  stagger: 0.1,
   ease: "power3.out",
   hideEase: "power2.in",
-  revealStart: "top 85%",
-  // Leave while some of the block is still on screen (not already off-canvas).
-  revealEnd: "bottom 38%",
-  amount: 88,
-  introAmount: 96,
-  scaleFrom: 0.88,
+  /** Smooth lag for scroll-linked reveals (seconds of catch-up). */
+  scrub: 0.4,
+  /** Enter-only: progressive appear, then stays visible (reverses on scroll up). */
+  enterStart: "top 90%",
+  enterEnd: "top 48%",
+  /** Through: full travel enter → hold → exit while scrolling the block. */
+  throughStart: "top 92%",
+  throughEnd: "bottom 12%",
+  scrubEnter: 0.32,
+  scrubExit: 0.28,
+  amount: 72,
+  introAmount: 80,
+  scaleFrom: 0.9,
 } as const;
 
 export type RevealVariant = "up" | "down" | "left" | "right" | "fade";
+export type RevealMode = "enter" | "through";
 
 export type VariantFromVars = {
   x?: number;
   y?: number;
 };
 
+/** Hidden state for entering from off-screen. */
 export function variantFrom(
   variant: RevealVariant,
   amount: number,
@@ -30,6 +39,25 @@ export function variantFrom(
       return { y: amount };
     case "down":
       return { y: -amount };
+    case "left":
+      return { x: -amount };
+    case "right":
+      return { x: amount };
+    case "fade":
+      return {};
+  }
+}
+
+/** Exit state continuing with scroll-down direction (not rubber-band reverse). */
+export function variantExit(
+  variant: RevealVariant,
+  amount: number,
+): VariantFromVars {
+  switch (variant) {
+    case "up":
+      return { y: -amount };
+    case "down":
+      return { y: amount };
     case "left":
       return { x: -amount };
     case "right":

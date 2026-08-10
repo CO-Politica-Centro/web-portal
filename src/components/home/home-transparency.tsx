@@ -11,7 +11,7 @@ export function HomeTransparency() {
       className="section-space border-foreground/10 border-t"
     >
       <div className="container-page">
-        <div className="max-w-2xl">
+        <div data-reveal-head className="max-w-2xl">
           <p className="eyebrow">{transparency.eyebrow}</p>
           <h2 id="transparency-heading" className="section-title mt-4">
             {transparency.title}
@@ -25,7 +25,7 @@ export function HomeTransparency() {
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {preview.map((category) => (
-            <li key={category.id}>
+            <li key={category.id} data-reveal-item>
               <Link
                 href="/transparencia"
                 className="border-foreground/10 bg-surface hover:border-brand-green/35 group flex h-full min-h-28 flex-col justify-between rounded-xl border px-5 py-4 transition-colors"
@@ -46,7 +46,7 @@ export function HomeTransparency() {
           ))}
         </ul>
 
-        <div className="mt-8">
+        <div data-reveal-item className="mt-8">
           <Link href="/transparencia" className="btn-primary sm:w-auto">
             Abrir transparencia activa
           </Link>

@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 type ColombiaRegionsMapProps = {
   groups: RegionLink[];
-  beaconsHref: string;
+  discordHref: string;
   email: string;
   international?: RegionLink;
 };
@@ -44,7 +44,7 @@ function StatusBadge({ active }: { active: boolean }) {
 
 export function ColombiaRegionsMap({
   groups,
-  beaconsHref,
+  discordHref,
   email,
   international,
 }: ColombiaRegionsMapProps) {
@@ -218,13 +218,13 @@ export function ColombiaRegionsMap({
               </h4>
               <p className="text-muted text-sm leading-relaxed">
                 Al seleccionar una región verás si el grupo está activo y cómo
-                unirte. El directorio completo también está en Beacons.
+                unirte. También puedes sumarte a la comunidad en Discord.
               </p>
               <ExternalLink
-                href={beaconsHref}
+                href={discordHref}
                 className="text-brand-green inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
               >
-                Abrir Beacons
+                Unirse a Discord
               </ExternalLink>
             </div>
           ) : null}

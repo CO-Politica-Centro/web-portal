@@ -8,7 +8,10 @@ export function HomeHighlights() {
       className="section-space border-foreground/10 border-t"
     >
       <div className="container-page">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div
+          data-reveal-head
+          className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+        >
           <div>
             <p className="eyebrow">Destacados</p>
             <h2 id="highlights-heading" className="section-title mt-4">
@@ -22,7 +25,11 @@ export function HomeHighlights() {
 
         <ul className="mt-12 grid gap-6 lg:grid-cols-3">
           {site.highlights.map((item) => (
-            <li key={item.title} className="border-foreground/10 border-t pt-5">
+            <li
+              key={item.title}
+              data-reveal-item
+              className="border-foreground/10 border-t pt-5"
+            >
               <h3 className="font-display text-xl font-semibold">
                 {item.title}
               </h3>

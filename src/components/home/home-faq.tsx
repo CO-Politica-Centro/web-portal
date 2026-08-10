@@ -20,7 +20,7 @@ export function HomeFaq() {
         className="pointer-events-none absolute inset-0 bg-[color-mix(in_srgb,var(--foreground)_3%,transparent)]"
       />
       <div className="container-page relative max-w-3xl">
-        <h2 id="faq-heading" className="section-title">
+        <h2 data-reveal-head id="faq-heading" className="section-title">
           Preguntas frecuentes
         </h2>
 
@@ -31,7 +31,7 @@ export function HomeFaq() {
             const buttonId = `${baseId}-button-${index}`;
 
             return (
-              <li key={item.question}>
+              <li key={item.question} data-reveal-item>
                 <div className="bg-surface border-foreground/10 border shadow-[0_1px_0_rgb(26_31_22_/0.04)]">
                   <button
                     id={buttonId}

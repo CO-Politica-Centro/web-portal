@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { MOTION, variantFrom } from "@/components/motion/tokens";
+import { MOTION, variantExit, variantFrom } from "@/components/motion/tokens";
 
 describe("variantFrom", () => {
   it("maps directional variants to offsets", () => {
@@ -12,12 +12,21 @@ describe("variantFrom", () => {
   it("returns empty vars for fade", () => {
     expect(variantFrom("fade", MOTION.amount)).toEqual({});
   });
+});
 
-  it("exposes intro timing tokens", () => {
+describe("variantExit", () => {
+  it("continues with scroll-down direction for up", () => {
+    expect(variantExit("up", MOTION.amount)).toEqual({ y: -MOTION.amount });
+  });
+});
+
+describe("MOTION tokens", () => {
+  it("exposes enter/through scrub settings", () => {
     expect(MOTION.introDuration).toBeGreaterThan(MOTION.duration);
-    expect(MOTION.introStagger).toBeGreaterThanOrEqual(MOTION.stagger);
     expect(MOTION.introAmount).toBeGreaterThan(MOTION.amount);
-    expect(MOTION.hideDuration).toBeLessThan(MOTION.duration);
+    expect(MOTION.scrub).toBeGreaterThan(0);
+    expect(MOTION.scrub).toBeLessThanOrEqual(0.5);
+    expect(MOTION.scrubEnter + MOTION.scrubExit).toBeLessThan(1);
     expect(MOTION.scaleFrom).toBeLessThan(1);
   });
 });
