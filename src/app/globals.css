@@ -166,3 +166,25 @@ h3 {
 .section-space {
   padding-block: var(--section-space);
 }
+
+/* Pre-hide intro targets before GSAP hydrates (only when motion is allowed). */
+html.motion-ok .motion-intro:not(.motion-intro-ready) [data-intro] {
+  opacity: 0;
+  transform: translate3d(0, 2.25rem, 0);
+}
+
+html.motion-ok [data-motion-enter]:not(.motion-enter-ready) {
+  opacity: 0;
+  transform: translate3d(0, 1.5rem, 0) scale(0.96);
+}
+
+html.motion-ok [data-header-intro]:not(.motion-enter-ready) {
+  opacity: 0;
+  transform: translate3d(0, -1.25rem, 0);
+}
+
+/* Pre-hide scroll reveals until GSAP takes over (class removed after gsap.set). */
+html.motion-ok .motion-reveal.is-pending > [data-reveal-content] {
+  opacity: 0;
+  transform: translate3d(0, 2.5rem, 0);
+}

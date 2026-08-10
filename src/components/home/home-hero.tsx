@@ -99,9 +99,14 @@ export function HomeHero() {
 
         <div className="order-1 flex flex-col items-center gap-4 lg:order-2">
           <LeadershipDualPortrait animateEntrance size="hero" />
-          <p className="text-muted max-w-xs text-center text-sm leading-relaxed">
-            {site.leadership.name} · {site.leadership.role}
-          </p>
+          <PageIntro delay={0.35}>
+            <p
+              data-intro
+              className="text-muted max-w-xs text-center text-sm leading-relaxed"
+            >
+              {site.leadership.name} · {site.leadership.role}
+            </p>
+          </PageIntro>
         </div>
       </div>
     </section>

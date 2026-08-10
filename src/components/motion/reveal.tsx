@@ -41,36 +41,72 @@ export function Reveal({
   useGSAP(
     () => {
       const root = ref.current;
-      if (!root || reduced) return;
+      if (!root) return;
 
-      const targets = stagger ? root.querySelectorAll(stagger) : [root];
-      if (stagger && targets.length === 0) return;
+      if (reduced) {
+        root.classList.remove("is-pending");
+        return;
+      }
 
-      const fromVars = {
+      const content = root.querySelector<HTMLElement>("[data-reveal-content]");
+      const targets = stagger
+        ? gsap.utils.toArray<HTMLElement>(root.querySelectorAll(stagger))
+        : content
+          ? [content]
+          : [];
+
+      if (targets.length === 0) {
+        root.classList.remove("is-pending");
+        return;
+      }
+
+      const hidden = {
         ...variantFrom(variant, amount),
         autoAlpha: 0,
       };
 
-      // immediateRender: false avoids hiding content before ScrollTrigger decides.
-      // clearProps only with once — clearing after toggle would break reverse.
-      gsap.fromTo(targets, fromVars, {
-        x: 0,
-        y: 0,
-        autoAlpha: 1,
-        duration: MOTION.duration,
-        ease: MOTION.ease,
-        delay,
-        stagger: stagger ? MOTION.stagger : 0,
-        immediateRender: false,
-        ...(once ? { clearProps: "transform,opacity,visibility" } : {}),
-        scrollTrigger: {
-          trigger: root,
-          start: MOTION.revealStart,
-          ...(once
-            ? { once: true }
-            : { toggleActions: "play reverse play reverse" }),
-        },
+      // Keep trigger (root) layout-stable; only animate inner targets.
+      gsap.set(targets, hidden);
+      root.classList.remove("is-pending");
+
+      const show = () =>
+        gsap.to(targets, {
+          x: 0,
+          y: 0,
+          autoAlpha: 1,
+          duration: MOTION.duration,
+          ease: MOTION.ease,
+          delay,
+          stagger: stagger ? MOTION.stagger : 0,
+          overwrite: "auto",
+        });
+
+      const hide = () =>
+        gsap.to(targets, {
+          ...hidden,
+          duration: MOTION.duration * 0.85,
+          ease: MOTION.ease,
+          stagger: stagger ? MOTION.stagger * 0.5 : 0,
+          overwrite: "auto",
+        });
+
+      const st = ScrollTrigger.create({
+        trigger: root,
+        start: MOTION.revealStart,
+        end: MOTION.revealEnd,
+        onEnter: show,
+        onEnterBack: show,
+        ...(once
+          ? { once: true }
+          : {
+              onLeave: hide,
+              onLeaveBack: hide,
+            }),
+        invalidateOnRefresh: true,
       });
+
+      // If already inside the active range on mount, fire enter once.
+      if (st.isActive) show();
     },
     {
       scope: ref,
@@ -78,20 +114,20 @@ export function Reveal({
     },
   );
 
+  const inner = <div data-reveal-content>{children}</div>;
+  const classes = cn("motion-reveal is-pending", className);
+
   if (Tag === "section") {
     return (
-      <section
-        ref={ref as React.RefObject<HTMLElement>}
-        className={cn(className)}
-      >
-        {children}
+      <section ref={ref as React.RefObject<HTMLElement>} className={classes}>
+        {inner}
       </section>
     );
   }
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className={cn(className)}>
-      {children}
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={classes}>
+      {inner}
     </div>
   );
 }

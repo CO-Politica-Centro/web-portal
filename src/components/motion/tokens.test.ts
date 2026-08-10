@@ -12,4 +12,10 @@ describe("variantFrom", () => {
   it("returns empty vars for fade", () => {
     expect(variantFrom("fade", MOTION.amount)).toEqual({});
   });
+
+  it("exposes intro timing tokens", () => {
+    expect(MOTION.introDuration).toBeGreaterThan(MOTION.duration);
+    expect(MOTION.introStagger).toBeGreaterThan(MOTION.stagger);
+    expect(MOTION.introAmount).toBeGreaterThan(MOTION.amount);
+  });
 });

@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { JsonLdOrganization, JsonLdWebsite } from "@/components/seo/json-ld";
 import { site } from "@/content/site";
+import { motionInitScript } from "@/lib/motion";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -78,6 +79,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: motionInitScript }} />
         <JsonLdOrganization />
         <JsonLdWebsite />
       </head>

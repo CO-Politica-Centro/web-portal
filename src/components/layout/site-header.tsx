@@ -1,25 +1,101 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { isNavActive } from "@/lib/nav";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { ExternalLink } from "@/components/layout/external-link";
 import { LinkUnderline } from "@/components/layout/link-underline";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { MOTION } from "@/components/motion/tokens";
 import { site } from "@/content/site";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { isNavActive } from "@/lib/nav";
+import { cn } from "@/lib/utils";
+
+gsap.registerPlugin(useGSAP);
 
 const navItems = site.nav;
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const barRef = useRef<HTMLDivElement>(null);
+  const reduced = usePrefersReducedMotion();
+
+  useGSAP(
+    () => {
+      const bar = barRef.current;
+      if (!bar) return;
+
+      if (reduced) {
+        bar.classList.add("motion-enter-ready");
+        return;
+      }
+
+      const brand = bar.querySelector("[data-header-brand]");
+      const links = bar.querySelectorAll("[data-header-link]");
+      const actions = bar.querySelector("[data-header-actions]");
+
+      const tl = gsap.timeline({
+        defaults: { ease: MOTION.ease },
+        onComplete: () => {
+          bar.classList.add("motion-enter-ready");
+          gsap.set([bar, brand, links, actions].filter(Boolean), {
+            clearProps: "transform,opacity,visibility",
+          });
+        },
+      });
+
+      tl.fromTo(
+        bar,
+        { y: -20, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.7 },
+      );
+
+      if (brand) {
+        tl.fromTo(
+          brand,
+          { y: -8, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.45 },
+          "-=0.35",
+        );
+      }
+
+      if (links.length > 0) {
+        tl.fromTo(
+          links,
+          { y: -6, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.4,
+            stagger: 0.05,
+          },
+          "-=0.25",
+        );
+      }
+
+      if (actions) {
+        tl.fromTo(
+          actions,
+          { y: -6, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.4 },
+          "-=0.3",
+        );
+      }
+    },
+    { scope: barRef, dependencies: [reduced] },
+  );
 
   return (
     <>
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 p-3 sm:p-4">
         <div
+          ref={barRef}
+          data-header-intro=""
           className={cn(
             "pointer-events-auto mx-auto flex h-14 max-w-[var(--max-w-page)] items-center justify-between gap-3 sm:h-14",
             "border-foreground/10 bg-surface/90 rounded-full border px-3 shadow-[0_8px_30px_rgb(0_0_0_/0.08)] backdrop-blur-md sm:px-5",
@@ -28,6 +104,7 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label={site.name}
+            data-header-brand=""
             className="inline-flex h-11 shrink-0 items-center"
           >
             <BrandMark
@@ -48,6 +125,7 @@ export function SiteHeader() {
                 <ExternalLink
                   key={item.href}
                   href={item.href}
+                  data-header-link=""
                   className="group hover:text-foreground inline-flex h-11 items-center gap-1 leading-none transition-colors"
                 >
                   <LinkUnderline>{item.label}</LinkUnderline>
@@ -59,6 +137,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  data-header-link=""
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "group hover:text-foreground inline-flex h-11 items-center leading-none transition-colors",
@@ -71,7 +150,7 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="flex h-11 items-center gap-2">
+          <div data-header-actions="" className="flex h-11 items-center gap-2">
             <ThemeToggle />
             <MobileNav items={navItems} />
           </div>

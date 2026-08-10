@@ -36,15 +36,29 @@ export function LeadershipDualPortrait({
   useGSAP(
     () => {
       const root = rootRef.current;
-      if (!root || !animateEntrance || reduced) return;
+      if (!root || !animateEntrance) return;
 
-      gsap.from(root, {
-        scale: 0.92,
-        opacity: 0,
-        duration: 0.75,
-        ease: "power2.out",
-        clearProps: "transform,opacity",
-      });
+      if (reduced) {
+        root.classList.add("motion-enter-ready");
+        return;
+      }
+
+      gsap.fromTo(
+        root,
+        { scale: 0.96, y: 24, autoAlpha: 0 },
+        {
+          scale: 1,
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.9,
+          delay: 0.15,
+          ease: "power2.out",
+          onComplete: () => {
+            root.classList.add("motion-enter-ready");
+            gsap.set(root, { clearProps: "transform,opacity,visibility" });
+          },
+        },
+      );
 
       return () => {
         timelineRef.current?.kill();
@@ -112,6 +126,7 @@ export function LeadershipDualPortrait({
   return (
     <div
       ref={rootRef}
+      {...(animateEntrance ? { "data-motion-enter": "" } : {})}
       className={cn(
         "relative mx-auto",
         isHero ? "w-full max-w-[22rem] sm:max-w-[26rem]" : "w-full max-w-64",
