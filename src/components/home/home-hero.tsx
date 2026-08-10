@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ExternalLink } from "@/components/layout/external-link";
 import { site } from "@/content/site";
 import { LeadershipDualPortrait } from "@/components/home/leadership-dual-portrait";
+import { PageIntro } from "@/components/motion/page-intro";
 import { ParallaxLite } from "@/components/motion/parallax-lite";
 
 const sectionLinks = [
@@ -28,9 +29,11 @@ export function HomeHero() {
       </ParallaxLite>
 
       <div className="container-page section-space relative grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="order-2 lg:order-1">
-          <p className="eyebrow">{site.eyebrow}</p>
-          <div className="mt-6 flex items-center gap-4">
+        <PageIntro className="order-2 lg:order-1">
+          <p data-intro className="eyebrow">
+            {site.eyebrow}
+          </p>
+          <div data-intro className="mt-6 flex items-center gap-4">
             <Image
               src="/brand/logo-flor.svg"
               alt=""
@@ -46,23 +49,30 @@ export function HomeHero() {
             </p>
           </div>
           <h1
+            data-intro
             id="hero-heading"
             className="mt-4 max-w-3xl text-5xl leading-[1.05] font-semibold sm:text-6xl lg:text-7xl"
           >
             {site.tagline}
           </h1>
-          <p className="text-muted mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">
+          <p
+            data-intro
+            className="text-muted mt-6 max-w-xl text-lg leading-relaxed sm:text-xl"
+          >
             {site.description}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div
+            data-intro
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+          >
             <Link href="/propuestas" className="btn-primary sm:w-auto">
               Conoce las propuestas
             </Link>
             <ExternalLink
-              href={site.urls.beacons}
+              href={site.urls.discord}
               className="btn-secondary sm:w-auto"
             >
-              Únete a las comunidades
+              Únete a Discord
             </ExternalLink>
             <ExternalLink
               href={site.urls.capacitacion}
@@ -71,7 +81,7 @@ export function HomeHero() {
               Capacitación
             </ExternalLink>
           </div>
-          <nav aria-label="En esta página" className="mt-8">
+          <nav data-intro aria-label="En esta página" className="mt-8">
             <ul className="text-muted flex flex-wrap gap-x-4 gap-y-2 text-sm">
               {sectionLinks.map((link) => (
                 <li key={link.href}>
@@ -85,7 +95,7 @@ export function HomeHero() {
               ))}
             </ul>
           </nav>
-        </div>
+        </PageIntro>
 
         <div className="order-1 flex flex-col items-center gap-4 lg:order-2">
           <LeadershipDualPortrait animateEntrance size="hero" />
