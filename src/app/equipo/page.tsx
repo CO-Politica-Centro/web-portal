@@ -61,8 +61,8 @@ export default function EquipoPage() {
               <p className="font-semibold">Equipo en consolidación</p>
               <p className="text-muted mt-1">
                 Más perfiles del núcleo organizativo se publicarán cuando la
-                estructura esté lista. Mientras tanto, el liderazgo público y las
-                comunidades son el punto de contacto.
+                estructura esté lista. Mientras tanto, el liderazgo público y
+                las comunidades son el punto de contacto.
               </p>
             </aside>
           </Reveal>

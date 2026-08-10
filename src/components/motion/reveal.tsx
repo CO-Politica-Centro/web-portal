@@ -90,10 +90,7 @@ export function Reveal({
   }
 
   return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={cn(className)}
-    >
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={cn(className)}>
       {children}
     </div>
   );
