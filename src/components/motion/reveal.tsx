@@ -63,6 +63,8 @@ export function Reveal({
       const hidden = {
         ...variantFrom(variant, amount),
         autoAlpha: 0,
+        scale: MOTION.scaleFrom,
+        transformOrigin: "50% 50%",
       };
 
       // Keep trigger (root) layout-stable; only animate inner targets.
@@ -73,6 +75,7 @@ export function Reveal({
         gsap.to(targets, {
           x: 0,
           y: 0,
+          scale: 1,
           autoAlpha: 1,
           duration: MOTION.duration,
           ease: MOTION.ease,
@@ -83,10 +86,12 @@ export function Reveal({
 
       const hide = () =>
         gsap.to(targets, {
-          ...hidden,
-          duration: MOTION.duration * 0.85,
-          ease: MOTION.ease,
-          stagger: stagger ? MOTION.stagger * 0.5 : 0,
+          ...variantFrom(variant, amount),
+          autoAlpha: 0,
+          scale: MOTION.scaleFrom,
+          duration: MOTION.hideDuration,
+          ease: MOTION.hideEase,
+          stagger: stagger ? MOTION.stagger * 0.6 : 0,
           overwrite: "auto",
         });
 

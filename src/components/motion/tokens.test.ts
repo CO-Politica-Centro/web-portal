@@ -15,7 +15,9 @@ describe("variantFrom", () => {
 
   it("exposes intro timing tokens", () => {
     expect(MOTION.introDuration).toBeGreaterThan(MOTION.duration);
-    expect(MOTION.introStagger).toBeGreaterThan(MOTION.stagger);
+    expect(MOTION.introStagger).toBeGreaterThanOrEqual(MOTION.stagger);
     expect(MOTION.introAmount).toBeGreaterThan(MOTION.amount);
+    expect(MOTION.hideDuration).toBeLessThan(MOTION.duration);
+    expect(MOTION.scaleFrom).toBeLessThan(1);
   });
 });

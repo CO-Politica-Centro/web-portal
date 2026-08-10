@@ -186,5 +186,5 @@ html.motion-ok [data-header-intro]:not(.motion-enter-ready) {
 /* Pre-hide scroll reveals until GSAP takes over (class removed after gsap.set). */
 html.motion-ok .motion-reveal.is-pending > [data-reveal-content] {
   opacity: 0;
-  transform: translate3d(0, 2.5rem, 0);
+  transform: translate3d(0, 5.5rem, 0) scale(0.88);
 }

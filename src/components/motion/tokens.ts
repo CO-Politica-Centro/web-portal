@@ -1,13 +1,17 @@
 export const MOTION = {
-  duration: 0.7,
-  introDuration: 0.85,
-  introStagger: 0.1,
-  stagger: 0.07,
-  ease: "power2.out",
-  revealStart: "top 88%",
-  revealEnd: "bottom 12%",
-  amount: 40,
-  introAmount: 48,
+  duration: 1.05,
+  hideDuration: 0.85,
+  introDuration: 1.1,
+  introStagger: 0.12,
+  stagger: 0.12,
+  ease: "power3.out",
+  hideEase: "power2.in",
+  revealStart: "top 85%",
+  // Leave while some of the block is still on screen (not already off-canvas).
+  revealEnd: "bottom 38%",
+  amount: 88,
+  introAmount: 96,
+  scaleFrom: 0.88,
 } as const;
 
 export type RevealVariant = "up" | "down" | "left" | "right" | "fade";
