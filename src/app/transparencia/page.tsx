@@ -3,18 +3,15 @@ import Link from "next/link";
 import { PageIntro } from "@/components/motion/page-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { TransparencyExplorer } from "./_components/transparency-explorer";
 
-const title = "Transparencia";
-const description =
-  "Transparencia activa de CO Politica Centro: identidad, organización, finanzas y hoja de ruta — con honestidad sobre lo disponible y lo pendiente.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/transparencia" },
-  openGraph: { title, description },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Transparencia sin maquillaje",
+  description:
+    "Identidad, organización, finanzas y hoja de ruta: qué ya está público y qué aún falta. Así se construye confianza.",
+  path: "/transparencia",
+});
 
 export default function TransparenciaPage() {
   const { transparency } = site;

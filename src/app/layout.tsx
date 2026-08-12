@@ -5,8 +5,8 @@ import { SkipLink } from "@/components/layout/skip-link";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { JsonLdOrganization, JsonLdWebsite } from "@/components/seo/json-ld";
-import { site } from "@/content/site";
 import { motionInitScript } from "@/lib/motion";
+import { getSiteUrl, SITE_SEO } from "@/lib/seo";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -22,20 +22,24 @@ const body = Source_Sans_3({
   display: "swap",
 });
 
-const FALLBACK_SITE_URL = "https://web-portal-co-politica.vercel.app";
-
-function resolveMetadataBase(): URL {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
-  return URL.canParse(raw) ? new URL(raw) : new URL(FALLBACK_SITE_URL);
-}
-
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — Portal`,
-    template: `%s · ${site.name}`,
+    default: SITE_SEO.titleDefault,
+    template: SITE_SEO.titleTemplate,
   },
-  description: site.description,
-  metadataBase: resolveMetadataBase(),
+  description: SITE_SEO.description,
+  metadataBase: new URL(getSiteUrl()),
+  applicationName: SITE_SEO.siteName,
+  authors: [{ name: SITE_SEO.siteName }],
+  creator: SITE_SEO.siteName,
+  keywords: [
+    "CO Politica Centro",
+    "centro político Colombia",
+    "liberalismo social",
+    "propuestas",
+    "transparencia",
+    "voluntariado político",
+  ],
   icons: {
     icon: [
       { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -46,24 +50,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_CO",
-    siteName: site.name,
-    title: site.tagline,
-    description: site.description,
-    images: [
-      {
-        url: "/brand/og-default.jpg",
-        width: 1200,
-        height: 630,
-        alt: `${site.name} — ${site.tagline}`,
-      },
-    ],
+    siteName: SITE_SEO.siteName,
+    title: SITE_SEO.titleDefault,
+    description: SITE_SEO.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: site.tagline,
-    description: site.description,
-    images: ["/brand/og-default.jpg"],
+    title: SITE_SEO.titleDefault,
+    description: SITE_SEO.description,
   },
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({

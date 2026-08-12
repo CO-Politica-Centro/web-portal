@@ -4,17 +4,14 @@ import { LeadershipDualPortrait } from "@/components/home/leadership-dual-portra
 import { PageIntro } from "@/components/motion/page-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
-const title = "Equipo";
-const description =
-  "Liderazgo de CO Politica Centro: Rafael Solano y un equipo en consolidación.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/equipo" },
-  openGraph: { title, description },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Equipo que construye el centro",
+  description:
+    "Conoce al liderazgo de CO Politica Centro: personas reales, en consolidación, con ideas para Colombia.",
+  path: "/equipo",
+});
 
 export default function EquipoPage() {
   const { leadership } = site;

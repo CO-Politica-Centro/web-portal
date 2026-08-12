@@ -64,7 +64,7 @@ export const site = {
   name: "CO Politica Centro",
   tagline: "Centro con ideas. Colombia con futuro.",
   description:
-    "Movimiento político de centro en Colombia, orientado al liberalismo social. Trabajamos con ideas claras para la vida cotidiana, las instituciones y la democracia.",
+    "Movimiento de centro liberal social: propuestas concretas, transparencia y comunidad para construir futuro.",
   disclaimer:
     "Somos un movimiento en consolidación. Aún no somos un partido político inscrito ante la autoridad electoral.",
   eyebrow: "Movimiento político · Colombia",

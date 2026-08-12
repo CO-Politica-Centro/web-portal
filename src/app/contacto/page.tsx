@@ -4,17 +4,14 @@ import { ExternalLink } from "@/components/layout/external-link";
 import { PageIntro } from "@/components/motion/page-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
-const title = "Contacto";
-const description =
-  "Contacto de prensa y participación de CO Politica Centro: email, Discord y redes.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/contacto" },
-  openGraph: { title, description },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Habla con el movimiento",
+  description:
+    "Prensa, ideas o participación: escríbenos, entra a Discord y únete a las redes de CO Politica Centro.",
+  path: "/contacto",
+});
 
 export default function ContactoPage() {
   return (

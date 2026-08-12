@@ -3,20 +3,14 @@ import Link from "next/link";
 import { PageIntro } from "@/components/motion/page-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
-const title = "Propuestas";
-const description =
-  "Programa por pilares del movimiento CO Politica Centro: economía, seguridad, educación y democracia.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/propuestas" },
-  openGraph: {
-    title,
-    description,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Propuestas que sí tocan la vida diaria",
+  description:
+    "Economía, seguridad, educación y democracia: un programa claro de centro para Colombia. Léelo y súmate al debate.",
+  path: "/propuestas",
+});
 
 export default function PropuestasPage() {
   return (

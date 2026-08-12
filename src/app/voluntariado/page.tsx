@@ -3,17 +3,14 @@ import { PageIntro } from "@/components/motion/page-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { VoluntariadoClient } from "@/features/voluntariado/voluntariado-client";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
-const title = "Voluntariado";
-const description =
-  "Banco de proyectos y talentos de CO Politica Centro: súmate a tareas técnicas, de diseño, legal, comunicación o territorio.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/voluntariado" },
-  openGraph: { title, description },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Voluntariado: tu talento mueve al centro",
+  description:
+    "Proyectos abiertos en tech, diseño, legal, comunicación y territorio. Elige una tarea y suma desde hoy.",
+  path: "/voluntariado",
+});
 
 export default function VoluntariadoPage() {
   return (
