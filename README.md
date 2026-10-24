@@ -26,7 +26,7 @@ Sitio público en [web-portal-co-politica.vercel.app](https://web-portal-co-poli
   </a>
 </p>
 
-## ✨ Características
+## Características
 
 - Home, propuestas, equipo y contacto.
 - Motion con GSAP y respeto a reduced-motion.
@@ -35,13 +35,13 @@ Sitio público en [web-portal-co-politica.vercel.app](https://web-portal-co-poli
 > [!NOTE]
 > El texto del movimiento se edita en `src/content/site.ts`, no repartido por los componentes.
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - **Next.js, React y Tailwind** — el portal.
 - **GSAP** — scroll. No tiene icono en la grilla.
 - **pnpm 11.1.1** — Node 22 o superior.
 
-## 🚀 Inicio rápido
+## Inicio rápido
 
 ```bash
 pnpm install
@@ -52,20 +52,20 @@ pnpm dev
 > [!IMPORTANT]
 > `pnpm run ci` junta lint, tipos, formato, pruebas y build.
 
-## 📖 Uso
+## Uso
 
 La invitación de Discord del sitio es https://discord.gg/VKjgAbDDvC.
 
 > [!TIP]
 > Con `prefers-reduced-motion` no hay reveals ni parallax. Prueba el portal también así.
 
-## 🤝 Contribuir
+## Contribuir
 
 Repositorio de [CO Politica Centro](https://github.com/CO-Politica-Centro).
 
 > [!WARNING]
 > No subas `.env.local`.
 
-## 📄 Licencia
+## Licencia
 
 Este repositorio no incluye un archivo de licencia.
