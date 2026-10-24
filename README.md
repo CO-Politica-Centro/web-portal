@@ -1,27 +1,47 @@
-# web-portal
+<p align="center">
+  <a href="README.md">Español</a> · <a href="README.en.md">English</a>
+</p>
 
-Portal público de **CO Politica Centro** — movimiento político de centro en Colombia (liberalismo social).
+<h1 align="center">Portal</h1>
 
-Producción: https://web-portal-co-politica.vercel.app
+<p align="center">
+  <img src="public/brand/og-default.jpg" alt="Imagen de marca del portal, crema, oro y verde" width="100%">
+</p>
 
-## Qué incluye
+<p align="center">Portal del movimiento de centro en Colombia.</p>
 
-- Home narrativa: hero, quiénes somos, pilares, destacados, liderazgo, actualidad, comunidades, cierre
-- Páginas `/propuestas`, `/equipo`, `/contacto`
-- Nav accesible (skip link, menú móvil ARIA, `aria-current`)
-- Scroll motion con GSAP + respeto a `prefers-reduced-motion`
-- Contenido centralizado en `src/content/site.ts`
-- Comunidad en Discord: https://discord.gg/VKjgAbDDvC
+Sitio público en [web-portal-co-politica.vercel.app](https://web-portal-co-politica.vercel.app). El contenido sale de `src/content/site.ts`. La comunidad está en Discord.
 
-## Stack
+<p align="center">
+  <a href="https://github.com/CO-Politica-Centro/web-portal/actions/workflows/ci.yml"><img src="https://github.com/CO-Politica-Centro/web-portal/actions/workflows/ci.yml/badge.svg" alt="Estado de CI"></a>
+</p>
 
-- Next.js 16 (App Router) + React 19 + TypeScript
-- Tailwind CSS v4 + `cn()` (`clsx` + `tailwind-merge`)
-- GSAP / `@gsap/react` / ScrollTrigger
-- Vitest, ESLint, Prettier, react-doctor
-- Vercel Analytics + GitHub Actions CI (solo paths de código)
+<p align="center">
+  <a href="https://skillicons.dev">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,pnpm,githubactions&theme=dark&perline=6">
+      <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,pnpm,githubactions&theme=light&perline=6">
+      <img alt="Next.js, React, TypeScript, Tailwind, pnpm, GitHub Actions" src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,pnpm,githubactions&perline=6">
+    </picture>
+  </a>
+</p>
 
-## Desarrollo
+## ✨ Características
+
+- Home, propuestas, equipo y contacto.
+- Motion con GSAP y respeto a reduced-motion.
+- CI y `pnpm test`.
+
+> [!NOTE]
+> El texto del movimiento se edita en `src/content/site.ts`, no repartido por los componentes.
+
+## 🛠️ Tecnologías
+
+- **Next.js, React y Tailwind** — el portal.
+- **GSAP** — scroll. No tiene icono en la grilla.
+- **pnpm 11.1.1** — Node 22 o superior.
+
+## 🚀 Inicio rápido
 
 ```bash
 pnpm install
@@ -29,27 +49,23 @@ cp .env.example .env.local
 pnpm dev
 ```
 
-## Scripts
+> [!IMPORTANT]
+> `pnpm run ci` junta lint, tipos, formato, pruebas y build.
 
-| Script              | Descripción                              |
-| ------------------- | ---------------------------------------- |
-| `pnpm dev`          | Servidor local                           |
-| `pnpm run ci`       | Lint + typecheck + format + test + build |
-| `pnpm react:doctor` | Análisis React Doctor                    |
+## 📖 Uso
 
-## Accesibilidad y motion
+La invitación de Discord del sitio es https://discord.gg/VKjgAbDDvC.
 
-- Skip link “Saltar al contenido”
-- Landmarks `header` / `main#contenido` / `footer`
-- Menú móvil con Escape, focus trap y cierre al navegar
-- Motion con GSAP: `PageIntro` (carga), `Reveal` por elemento con scrub (`mode="through"` en cierres) y `ParallaxLite` (hero)
-- Script `motion-ok` pre-oculta intros antes de hidratar para que la carga se vea
-- Con `prefers-reduced-motion: reduce` no hay reveals, intros ni parallax
+> [!TIP]
+> Con `prefers-reduced-motion` no hay reveals ni parallax. Prueba el portal también así.
 
-## Despliegue (Vercel)
+## 🤝 Contribuir
 
-- Proyecto: `web-portal-co-politica`
-- Variable: `NEXT_PUBLIC_SITE_URL`
-- Para deploys automáticos desde GitHub: instalar la [GitHub App de Vercel](https://github.com/apps/vercel) en la org y vincular el repo
+Repositorio de [CO Politica Centro](https://github.com/CO-Politica-Centro).
 
-Dominio custom: Project → Settings → Domains.
+> [!WARNING]
+> No subas `.env.local`.
+
+## 📄 Licencia
+
+Este repositorio no incluye un archivo de licencia.
